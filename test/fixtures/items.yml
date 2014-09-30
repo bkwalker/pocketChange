@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  location_id: 1
+  name: MyString
+  description: MyText
+  price: 9.99
+  picture: MyString
+  price_negotiable: false
+  condition: MyString
+  sold: false
+  tag: MyText
+  active: false
+
+two:
+  user_id: 1
+  location_id: 1
+  name: MyString
+  description: MyText
+  price: 9.99
+  picture: MyString
+  price_negotiable: false
+  condition: MyString
+  sold: false
+  tag: MyText
+  active: false

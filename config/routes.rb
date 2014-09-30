@@ -1,4 +1,16 @@
 PocketChange::Application.routes.draw do
+  resources :messages
+
+
+  resources :conversations
+
+
+  resources :offers
+
+
+  resources :items
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
