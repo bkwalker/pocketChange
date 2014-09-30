@@ -1,0 +1,35 @@
+<h1>Listing book_details</h1>
+
+<table>
+  <tr>
+    <th>Item</th>
+    <th>Authors</th>
+    <th>Course number</th>
+    <th>Isbn</th>
+    <th>Publication year</th>
+    <th>Publisher</th>
+    <th>Amazon lowest price</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @book_details.each do |book_detail| %>
+  <tr>
+    <td><%= book_detail.item_id %></td>
+    <td><%= book_detail.authors %></td>
+    <td><%= book_detail.course_number %></td>
+    <td><%= book_detail.isbn %></td>
+    <td><%= book_detail.publication_year %></td>
+    <td><%= book_detail.publisher %></td>
+    <td><%= book_detail.amazon_lowest_price %></td>
+    <td><%= link_to 'Show', book_detail %></td>
+    <td><%= link_to 'Edit', edit_book_detail_path(book_detail) %></td>
+    <td><%= link_to 'Destroy', book_detail, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Book detail', new_book_detail_path %>

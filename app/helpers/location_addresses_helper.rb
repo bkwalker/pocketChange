@@ -1,0 +1,2 @@
+module LocationAddressesHelper
+end

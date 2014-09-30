@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  location_id: 1
+  start_time: 2014-09-30 18:30:17
+  end_time: 2014-09-30 18:30:17
+
+two:
+  location_id: 1
+  start_time: 2014-09-30 18:30:17
+  end_time: 2014-09-30 18:30:17

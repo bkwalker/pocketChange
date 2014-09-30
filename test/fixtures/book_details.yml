@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  item_id: 1
+  authors: MyText
+  course_number: MyString
+  isbn: MyString
+  publication_year: 1
+  publisher: MyString
+  amazon_lowest_price: 9.99
+
+two:
+  item_id: 1
+  authors: MyText
+  course_number: MyString
+  isbn: MyString
+  publication_year: 1
+  publisher: MyString
+  amazon_lowest_price: 9.99

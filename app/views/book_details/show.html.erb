@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Item:</b>
+  <%= @book_detail.item_id %>
+</p>
+
+<p>
+  <b>Authors:</b>
+  <%= @book_detail.authors %>
+</p>
+
+<p>
+  <b>Course number:</b>
+  <%= @book_detail.course_number %>
+</p>
+
+<p>
+  <b>Isbn:</b>
+  <%= @book_detail.isbn %>
+</p>
+
+<p>
+  <b>Publication year:</b>
+  <%= @book_detail.publication_year %>
+</p>
+
+<p>
+  <b>Publisher:</b>
+  <%= @book_detail.publisher %>
+</p>
+
+<p>
+  <b>Amazon lowest price:</b>
+  <%= @book_detail.amazon_lowest_price %>
+</p>
+
+
+<%= link_to 'Edit', edit_book_detail_path(@book_detail) %> |
+<%= link_to 'Back', book_details_path %>
