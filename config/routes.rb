@@ -1,14 +1,18 @@
 PocketChange::Application.routes.draw do
   resources :book_details
+  resources :messages
 
 
   resources :reviews
+  resources :conversations
 
 
   resources :availabilities
+  resources :offers
 
 
   resources :location_addresses
+  resources :items
 
 
   resources :locations

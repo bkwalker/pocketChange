@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Item:</b>
+  <%= @offer.item_id %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @offer.user_id %>
+</p>
+
+<p>
+  <b>Amount:</b>
+  <%= @offer.amount %>
+</p>
+
+<p>
+  <b>Counter amount:</b>
+  <%= @offer.counter_amount %>
+</p>
+
+<p>
+  <b>Payment method:</b>
+  <%= @offer.payment_method %>
+</p>
+
+<p>
+  <b>Pickup time:</b>
+  <%= @offer.pickup_time %>
+</p>
+
+<p>
+  <b>Delivery method:</b>
+  <%= @offer.delivery_method %>
+</p>
+
+<p>
+  <b>Accepted:</b>
+  <%= @offer.accepted %>
+</p>
+
+<p>
+  <b>Active:</b>
+  <%= @offer.active %>
+</p>
+
+
+<%= link_to 'Edit', edit_offer_path(@offer) %> |
+<%= link_to 'Back', offers_path %>
