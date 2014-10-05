@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   ROLES = [['Administrator', :admin], ['Member', :member]]
 
   # Validations
-  validate_presence_of :first_name, :last_name, :dob
+  validates_presence_of :first_name, :last_name, :dob
   validates_date :dob, :on_or_before => lambda { Date.new(13.years.ago) }, :message => "You must be older than 13 to use this application."
   validates_format_of :email, :with => /^[\w]([^@\s,;]+)@(([\w-]+\.)+(andrew.edu))$/i, :message => "Valid CMU ID Required", :allow_blank => false
   validates_uniqueness_of :email, :case_sensitive => false, :allow_blank => false

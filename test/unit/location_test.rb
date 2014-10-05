@@ -3,7 +3,7 @@ require 'test_helper'
 class LocationTest < ActiveSupport::TestCase
 	
 	#Relationship Tests
-	should have_on(:location_address)
+	should have_one(:location_address)
 
 	# tests for name
 	should validate_presence_of(:name)

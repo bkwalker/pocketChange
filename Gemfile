@@ -6,7 +6,13 @@ gem 'rails', '3.2.17'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'pg'
-
+gem 'validates_timeliness', '~> 3.0'
+gem 'simple_form'
+gem 'will_paginate'
+gem 'carrierwave'
+gem 'nested_form'
+gem 'tconsole', '1.2.8'
+gem 'cancancan', '~> 1.7'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -36,3 +42,11 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 
 # To use debugger
 # gem 'debugger'
+
+# Gems used only in testing
+group :test do
+  gem 'shoulda'
+  gem 'shoulda-matchers'
+  gem 'simplecov'
+  gem 'factory_girl_rails'
+end

@@ -17,7 +17,7 @@ class LocationAddress < ActiveRecord::Base
   validates_presence_of :street, :city
   validates_inclusion_of :state, :in => STATES_LIST.map {|k, v| v}, :message => "Not a recognized State"
   validates_format_of :zip, :with => /^\d{5}$/, :message => "Should be five digits long"
-  validates_numericality_of :location_id
+  validates_numericality_of :location_id, :greater_than_or_equal_to => 1, :only_integer => true, :allow_nil => false
 
   # Other methods
   def full_address
