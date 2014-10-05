@@ -20,7 +20,9 @@ class LocationAddress < ActiveRecord::Base
   validates_numericality_of :location_id
 
   # Other methods
-  
+  def full_address
+  "#{street}, #{city}, #{state} #{zip}"
+  end
 
   # Private methods
   private
