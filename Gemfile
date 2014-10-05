@@ -20,6 +20,16 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+group :test do
+  gem 'shoulda'
+  gem 'shoulda-matchers'
+  gem 'mocha', require: false
+  gem 'simplecov'
+  gem 'turn'
+  gem 'single_test'
+  gem 'factory_girl_rails'
+end
+
 gem 'jquery-rails'
 
 # To use ActiveModel has_secure_password
