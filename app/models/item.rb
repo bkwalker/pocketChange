@@ -1,5 +1,5 @@
 class Item < ActiveRecord::Base
-  attr_accessible :active, :condition, :description, :location_id, :name, :picture, :price, :price_negotiable, :sold, :tag, :user_id
+  attr_accessible :user_id, :location_id, :active, :condition, :description, :name, :picture, :price, :price_negotiable, :sold, :tag
 
   belongs_to :user
   belongs_to :location
