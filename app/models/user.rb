@@ -1,8 +1,14 @@
+#Tasks that need to be completed:
+#Migration for Gender and DOB and role -- validations already made below need to be uncommented along with tests afterwords
+
+
 class User < ActiveRecord::Base
-  attr_accessible :active, :email, :last_name, :last_name, :password, :password_confirmation, :picture, :rating, :gender, :dob
+  attr_accessible :active, :email, :last_name, :last_name, :password, :password_confirmation, :picture, :rating, :gender, :dob, :role
 
   # Relationships
-
+  has_many :reviews
+  has_many :items
+  has_many :locations
 
   # Callbacks
   before_save :reformat_text
@@ -14,16 +20,18 @@ class User < ActiveRecord::Base
   # Lists
   
   # for use in authorizing with CanCan
-  ROLES = [['Administrator', :admin], ['Member', :member]]
+  ROLES = [['Admin', :admin], ['Member', :member]]
 
   # Validations
-  validates_presence_of :first_name, :last_name, :dob
-  validates_date :dob, :on_or_before => lambda { Date.new(13.years.ago) }, :message => "You must be older than 13 to use this application."
-  validates_format_of :email, :with => /^[\w]([^@\s,;]+)@(([\w-]+\.)+(andrew.edu))$/i, :message => "Valid CMU ID Required", :allow_blank => false
+  validates_presence_of :first_name, :last_name #, :dob
+  #validates_date :dob, :on_or_before => lambda { Date.new(13.years.ago) }, :message => "You must be older than 13 to use this application."
+  validates_format_of :email, :with => /^[\w]([^@\s,;]+)@(andrew.cmu.edu)$/i, :message => "Valid CMU ID Required", :allow_blank => false
   validates_uniqueness_of :email, :case_sensitive => false, :allow_blank => false
-  validates_numericality_of :rating
-  validates_inclusion_of :gender, :in => [true, false]
+  validates_numericality_of :rating, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 5, :allow_blank => true
+  validates_format_of :rating, :with => /\A\d+(?:\.\d{0,2})?\z/
+  #validates_inclusion_of :gender, :in => [true, false]
   validates_inclusion_of :active, :in => [true, false]
+  # validates_inclusion_of :role, :in => %w[Admin Member], :message => "Unrecognized role given"
 
   # Other methods
   def name
