@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140930224319) do
+ActiveRecord::Schema.define(:version => 20141014203411) do
 
   create_table "availabilities", :force => true do |t|
     t.integer  "location_id"
@@ -116,6 +116,8 @@ ActiveRecord::Schema.define(:version => 20140930224319) do
     t.boolean  "active"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.boolean  "gender"
+    t.date     "dob"
   end
 
 end

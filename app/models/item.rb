@@ -6,18 +6,22 @@ class Item < ActiveRecord::Base
   has_many :offers
   has_one :book_detail
 
-  validates_presence_of :name, :description, :picture, :condition, :tag
+  validates_presence_of :name, :description, :picture, :condition, :user_id, :price, :tag, :sold, :price_negotiable
+
   validates :price, :numericality => { :greater_than => 0 }
   validates_format_of :price, :with => /\A\d+(?:\.\d{0,2})?\z/
   validates :price_negotiable, :inclusion => {:in => [true, false]}
-  validates :sold, :inclusion => {:in => [true, false]}
-  validates :active, :inclusion => {:in => [true, false]}
+  validates_inclusion_of :sold, :in => [true, false]
+  validates_inclusion_of :active, :in => [true, false]
+  validates_inclusion_of :price_negotiable, :in => [true, false]
+
 
   scope :alphabetical, -> { order('name') }
   scope :active, -> { where(active: true) }  
-  scope :avaliable, -> { where(sold: false) }
+  scope :avaliable, -> { where(sold: true) }
   scope :sold, -> { where(sold: false) }
-  scope :price_ceiling, -> { where('price = ?', price) }
+  scope :price_ceiling, -> { where('price <= ?', price) }
+
 
 
 
