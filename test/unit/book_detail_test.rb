@@ -36,20 +36,27 @@ class BookDetailTest < ActiveSupport::TestCase
   context "Given context" do
     # create the objects I want with factories
     setup do   
-      @shaun = FactoryGirl.create(:user, first_name: "Shaun", last_name: "Sophie")
-      @harryPotter = FactoryGirl.create(:item, name: "HP4", description: "ABC", picture: "A", condition: "good", user: @shaun, price: 44.30, sold: true, price_negotiable: false)
-      @book1 = FactoryGirl.create(:book_detail, name: "Deathly Hallows", authors: "JK Rowling", publication_year: 2009, item: @HarryPotter, amazon_lowest_price: 34.00)
+      @tester1 = FactoryGirl.create(:location)
+      @tester2 = FactoryGirl.create(:location_address)
+      @tester3 = FactoryGirl.create(:user)
+      @tester4 = FactoryGirl.create(:item)
+      @tester5 = FactoryGirl.create(:book_detail)
+      # @shaun = FactoryGirl.create(:user, first_name: "Shaun", last_name: "Sophie")
+      # @harryPotter = FactoryGirl.create(:item, name: "HP4", description: "ABC", picture: "A", condition: "good", user: @shaun, price: 44.30, sold: true, price_negotiable: false)
+      # @book1 = FactoryGirl.create(:book_detail, authors: "JK Rowling", publication_year: 2009, item: @harryPotter, amazon_lowest_price: 34.00)
     end
     
     # and provide a teardown method as well
     teardown do
-      @shaun.destroy
-      @harryPotter.destroy
-      @book1.destroy
+      @tester1.destroy
+      @tester2.destroy
+      @tester3.destroy
+      @tester4.destroy
+      @tester5.destroy   
     end
 
     should "shows that comparison method works" do
-      assert_equal true, @book1.comparison
+      assert_equal false, @tester5.comparison
     end
   end
 end

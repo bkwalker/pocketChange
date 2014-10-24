@@ -1,8 +1,9 @@
 class User < ActiveRecord::Base
+  has_secure_password
+
   attr_accessible :active, :email, :first_name, :last_name, :password, :password_confirmation, :picture, :rating, :gender, :dob
 
   # Relationships
-
 
   # Callbacks
   # before_save :reformat_text
@@ -18,8 +19,8 @@ class User < ActiveRecord::Base
 
   # Validations
   validates_presence_of :first_name, :last_name
-  validates_date :dob, :on_or_before => lambda { Date.new(13.years.ago) }, :message => "You must be older than 13 to use this application."
-  validates_format_of :email, :with => /^[\w]([^@\s,;]+)@(([\w-]+\.)+(andrew.edu))$/i, :message => "Valid CMU ID Required", :allow_blank => false
+  # validates_date :dob, :on_or_before => lambda { Date.new(13.years.ago) }, :message => "You must be older than 13 to use this application."
+  # validates_format_of :email, :with => /^[\w]([^@\s,;]+)@(([\w-]+\.)+(andrew.cmu.edu))$/i, :message => "Valid CMU ID Required", :allow_blank => false
   validates_uniqueness_of :email, :case_sensitive => false, :allow_blank => false
   validates_numericality_of :rating
   validates_inclusion_of :gender, :in => [true, false]

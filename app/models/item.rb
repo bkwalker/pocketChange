@@ -6,7 +6,7 @@ class Item < ActiveRecord::Base
   has_many :offers
   has_one :book_detail
 
-  validates_presence_of :name, :description, :picture, :condition, :user_id, :price, :tag, :sold, :price_negotiable
+  validates_presence_of :name, :description, :picture, :condition, :user_id, :price, :tag
 
   validates :price, :numericality => { :greater_than => 0 }
   validates_format_of :price, :with => /\A\d+(?:\.\d{0,2})?\z/

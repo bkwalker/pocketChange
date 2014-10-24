@@ -22,14 +22,12 @@ class ItemTest < ActiveSupport::TestCase
   should validate_presence_of(:picture)
   should validate_presence_of(:condition)
   should validate_presence_of(:tag)
-  should validate_presence_of(:price_negotiable) 
-  should validate_presence_of(:sold)
   should validate_presence_of(:user_id)
 
   #Validating Price Negotiable
   should allow_value(true).for(:price_negotiable)
   should allow_value(false).for(:price_negotiable)
-  
+
   should_not allow_value(nil).for(:price_negotiable)
   # should_not allow_value(123).for(:price_negotiable)
   # should_not allow_value("bad").for(:price_negotiable)
