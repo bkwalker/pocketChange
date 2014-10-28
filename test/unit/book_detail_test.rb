@@ -41,6 +41,8 @@ class BookDetailTest < ActiveSupport::TestCase
       @tester3 = FactoryGirl.create(:user)
       @tester4 = FactoryGirl.create(:item)
       @tester5 = FactoryGirl.create(:book_detail)
+      @harryPotter = FactoryGirl.create(:item, price: 23.75)
+      @Potter1 = FactoryGirl.create(:book_detail, item: @harryPotter)
       # @shaun = FactoryGirl.create(:user, first_name: "Shaun", last_name: "Sophie")
       # @harryPotter = FactoryGirl.create(:item, name: "HP4", description: "ABC", picture: "A", condition: "good", user: @shaun, price: 44.30, sold: true, price_negotiable: false)
       # @book1 = FactoryGirl.create(:book_detail, authors: "JK Rowling", publication_year: 2009, item: @harryPotter, amazon_lowest_price: 34.00)
@@ -52,11 +54,13 @@ class BookDetailTest < ActiveSupport::TestCase
       @tester2.destroy
       @tester3.destroy
       @tester4.destroy
-      @tester5.destroy   
+      @tester5.destroy 
+      @Potter1.destroy  
     end
 
     should "shows that comparison method works" do
       assert_equal false, @tester5.comparison
+      assert_equal true, @Potter1.comparison
     end
   end
 end

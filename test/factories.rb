@@ -7,6 +7,13 @@ FactoryGirl.define do
     user_id 1
   end
 
+  factory :review do 
+    comments "tester is great"
+    rating 5
+    reviewer_id 1
+    user_id 1
+  end
+
   factory :location_address do
     association :location
     city "Purcellville"
@@ -17,7 +24,6 @@ FactoryGirl.define do
   end
 
  factory :user do
-    # association :item
     first_name "Sophie"
     last_name "Batton"
     email "sophieisgreatandpowerful1@andrew.cmu.edu"

@@ -4,6 +4,9 @@ class User < ActiveRecord::Base
   attr_accessible :active, :email, :first_name, :last_name, :password, :password_confirmation, :picture, :rating, :gender, :dob
 
   # Relationships
+  has_many :items
+  has_many :reviews
+  has_many :locations
 
   # Callbacks
   # before_save :reformat_text
