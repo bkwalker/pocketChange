@@ -1,4 +1,10 @@
 PocketChange::Application.routes.draw do
+  get "sessions/create"
+
+  get "sessions/destoy"
+
+  get "home/show"
+
   resources :book_details
   resources :messages
 
