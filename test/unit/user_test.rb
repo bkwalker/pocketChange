@@ -7,8 +7,8 @@ class UserTest < ActiveSupport::TestCase
 	should have_many(:locations)
 
 	#tests for name
-	# should validate_presence_of(:first_name)
-	# should validate_presence_of(:last_name)
+	should validate_presence_of(:first_name)
+	should validate_presence_of(:last_name)
 
 	# test active
 	should allow_value(true).for(:active)
@@ -28,14 +28,14 @@ class UserTest < ActiveSupport::TestCase
 	should_not allow_value("fred@fred.con").for(:email)
 	should_not allow_value(nil).for(:email)
 
-	#tests for role
-	# should allow_value("Admin").for(:role)
-	# should allow_value("Member").for(:role)
-	# should_not allow_value("bad").for(:role)
-	# should_not allow_value("hacker").for(:role)
-	# should_not allow_value(10).for(:role)
-	# should_not allow_value("leader").for(:role)
-	# should_not allow_value(nil).for(:role)
+	# tests for role
+	should allow_value("Admin").for(:role)
+	should allow_value("Member").for(:role)
+	should_not allow_value("bad").for(:role)
+	should_not allow_value("hacker").for(:role)
+	should_not allow_value(10).for(:role)
+	should_not allow_value("leader").for(:role)
+	should_not allow_value(nil).for(:role)
 
-	#tests for 
+	#tests for
 end
