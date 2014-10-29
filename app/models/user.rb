@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessible :active, :email, :last_name, :last_name, :password, :password_confirmation, :picture, :rating, :gender, :dob
+  attr_accessible :active, :email, :last_name, :last_name, :password, :password_confirmation, :picture, :rating, :gender, :dob, :provider, :uid, :name, :oauth_token, :oauth_expires_at
 
   # Relationships
 
@@ -19,9 +19,9 @@ class User < ActiveRecord::Base
   # Validations
   validates_presence_of :first_name, :last_name, :dob
   validates_date :dob, :on_or_before => lambda { Date.new(13.years.ago) }, :message => "You must be older than 13 to use this application."
-  validates_format_of :email, :with => /^[\w]([^@\s,;]+)@(([\w-]+\.)+(andrew.edu))$/i, :message => "Valid CMU ID Required", :allow_blank => false
+  validates_format_of :email, :with => /^([\w]+([^@\s,;])@(andrew\.cmu\.edu))$/i, :message => "Valid CMU ID Required", :allow_blank => false
   validates_uniqueness_of :email, :case_sensitive => false, :allow_blank => false
-  validates_numericality_of :rating
+  validates_numericality_of :rating, :allow_blank => true
   validates_inclusion_of :gender, :in => [true, false]
   validates_inclusion_of :active, :in => [true, false]
 
@@ -61,13 +61,25 @@ class User < ActiveRecord::Base
   end
 
   def self.from_omniauth(auth)
-    where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
+    if user = User.find_by_email(auth.info.email)
       user.provider = auth.provider
       user.uid = auth.uid
-      user.name = auth.info.name
-      user.oauth_token = auth.credentials.token
-      user.oauth_expires_at = Time.at(auth.credentials.expires_at)
-      user.save!
+      user
+    else
+      where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
+        user.provider = auth.provider
+        user.email = auth.info.email
+        user.last_name = auth.info.last_name
+        user.dob = 19.years.ago
+        user.gender = true
+        user.active = true
+        user.uid = auth.uid
+        user.name = auth.info.name
+        user.first_name = auth.info.first_name
+        user.oauth_token = auth.credentials.token
+        user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+        user.save!
+      end
     end
   end
 
