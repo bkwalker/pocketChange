@@ -1,4 +1,7 @@
 PocketChange::Application.routes.draw do
+  root: 'home#show'
+
+
   resources :book_details
   resources :messages
 
