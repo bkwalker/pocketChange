@@ -56,9 +56,9 @@ class User < ActiveRecord::Base
   end
 
   # login by email address
-  def self.authenticate(email, password)
-    find_by_email(email).try(:authenticate, password)
-  end
+  # def self.authenticate(email, password)
+  #   find_by_email(email).try(:authenticate, password)
+  # end
 
   def self.from_omniauth(auth)
     if user = User.find_by_email(auth.info.email)
@@ -67,20 +67,18 @@ class User < ActiveRecord::Base
       user
     else
       user = User.new
-      auth.slice(:provider, :uid).tap do 
-        user.provider = auth.provider
-        user.email = auth.info.email
-        user.last_name = auth.extra.raw_info.given_name
-        user.dob = 19.years.ago
-        user.gender = true
-        user.active = true
-        user.uid = auth.uid
-        user.name = auth.info.name
-        user.first_name = auth.info.first_name
-        user.oauth_token = auth.credentials.token
-        user.oauth_expires_at = Time.at(auth.credentials.expires_at)
-        user.save!
-      end
+      user.provider = auth.provider
+      user.email = auth.info.email
+      user.last_name = auth.extra.raw_info.given_name
+      user.dob = 19.years.ago
+      user.gender = true
+      user.active = true
+      user.uid = auth.uid
+      user.name = auth.info.name
+      user.first_name = auth.info.first_name
+      user.oauth_token = auth.credentials.token
+      user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+      user.save!
       user
     end
   end
