@@ -1,60 +1,36 @@
 <p id="notice"><%= notice %></p>
-
-<p>
-  <b>User:</b>
-  <%= @item.user_id %>
-</p>
-
-<p>
-  <b>Location:</b>
-  <%= @item.location_id %>
-</p>
-
-<p>
-  <b>Name:</b>
-  <%= @item.name %>
-</p>
-
-<p>
-  <b>Description:</b>
-  <%= @item.description %>
-</p>
-
-<p>
-  <b>Price:</b>
-  <%= @item.price %>
-</p>
-
-<p>
-  <b>Picture:</b>
-  <%= @item.picture %>
-</p>
-
-<p>
-  <b>Price negotiable:</b>
-  <%= @item.price_negotiable %>
-</p>
-
-<p>
-  <b>Condition:</b>
-  <%= @item.condition %>
-</p>
-
-<p>
-  <b>Sold:</b>
-  <%= @item.sold %>
-</p>
-
-<p>
-  <b>Tag:</b>
-  <%= @item.tag %>
-</p>
-
-<p>
-  <b>Active:</b>
-  <%= @item.active %>
-</p>
+<h1> <%= @item.name %> </h1>
+<table>
+  <tr>
+    <td>
+      <p>
+        <%= image_tag(@item.picture.url, size:"100x100") %>
+      </p>
+    </td>
+    <td>
+        <b>Seller:</b><br>
+        <b>Price:</b><br>
+        <b>Condition:</b><br>
+        <b>Tags:</b><br>
+        <b>Price Negotiable:</b>
+    </td>
+    <td>
+      <%= User.find_by_id(@item.user_id).proper_name %><br>
+      $<%= @item.price %><br>
+      <%= @item.condition %><br>
+      <%= @item.tag %><br>
+      <%= @item.price_negotiable ? "Yes" : "No"  %><br>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b>Description:</b><br><br>
+      <%= @item.description %>
+    </td>
+  </tr>
+</table>
 
 
 <%= link_to 'Edit', edit_item_path(@item) %> |
+<%= link_to 'Delete Item', item_path(@item), :confirm => 'Are you sure?', :method => :delete %> |
 <%= link_to 'Back', items_path %>
