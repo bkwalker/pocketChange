@@ -1,34 +1,34 @@
 <p id="notice"><%= notice %></p>
 <h1> <%= @item.name %> </h1>
-<table>
+<table style="padding-left:40px">
   <tr>
     <td>
-      <p>
-        <%= image_tag(@item.picture.url, size:"100x100") %>
-      </p>
+        <%= image_tag(@item.picture.url, size:"150x150") %>
     </td>
-    <td>
+    <td style="width:50px">
+    </td>
+    <td style="width:150px">
         <b>Seller:</b><br>
         <b>Price:</b><br>
         <b>Condition:</b><br>
         <b>Tags:</b><br>
-        <b>Price Negotiable:</b>
+        <b>Price Negotiable:</b><br><br>
     </td>
     <td>
       <%= User.find_by_id(@item.user_id).proper_name %><br>
-      $<%= @item.price %><br>
-      <%= @item.condition %><br>
+      <%= number_to_currency(@item.price) %><br>
+      <%= @item.condition_name %><br>
       <%= @item.tag %><br>
       <%= @item.price_negotiable ? "Yes" : "No"  %><br>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <b>Description:</b><br><br>
-      <%= @item.description %>
+      <%= button_tag "Buy"%> 
     </td>
   </tr>
 </table>
+<br>
+
+<b style="padding-left:40px">Description:</b><br>
+<p style="padding-left:55px"><%= @item.description %></p>
+<br>
 
 
 <%= link_to 'Edit', edit_item_path(@item) %> |

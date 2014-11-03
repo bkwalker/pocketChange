@@ -26,7 +26,20 @@ class Item < ActiveRecord::Base
   scope :sold, -> { where(sold: false) }
   scope :price_ceiling, -> { where('price <= ?', price) }
 
-
+  def condition_name
+    condition = self.condition
+    if condition == "0"
+      return "New"
+    elsif condition == "1"
+      return "Like New"
+    elsif condition == "2"
+      return "Good"
+    elsif condition == "3"
+      return "Fair"
+    elsif condition == "4"
+      return "poor"    
+    end
+  end
 
 
 
