@@ -27,9 +27,9 @@ class User < ActiveRecord::Base
   validates_inclusion_of :active, :in => [true, false]
 
   # Other methods
-  def name
-    "#{last_name}, #{first_name}"
-  end
+  # def name
+  #   "#{last_name}, #{first_name}"
+  # end
   
   def proper_name
     "#{first_name} #{last_name}"
@@ -62,6 +62,7 @@ class User < ActiveRecord::Base
   # end
 
   def self.from_omniauth(auth)
+    puts "auth.info.email"
     if user = User.find_by_email(auth.info.email)
       user.provider = auth.provider
       user.uid = auth.uid
@@ -71,8 +72,8 @@ class User < ActiveRecord::Base
       user.provider = auth.provider
       user.email = auth.info.email
       user.last_name = auth.extra.raw_info.family_name
-      user.dob = 19.years.ago
-      user.gender = true
+      # user.dob = 19.years.ago
+      user.gender = auth.extra.raw_info.gender = "male" ? true : false
       user.active = true
       user.uid = auth.uid
       user.name = auth.info.name
