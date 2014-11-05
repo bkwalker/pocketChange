@@ -70,7 +70,7 @@ class User < ActiveRecord::Base
       user = User.new
       user.provider = auth.provider
       user.email = auth.info.email
-      user.last_name = auth.extra.raw_info.given_name
+      user.last_name = auth.extra.raw_info.family_name
       user.dob = 19.years.ago
       user.gender = true
       user.active = true
@@ -78,6 +78,8 @@ class User < ActiveRecord::Base
       user.name = auth.info.name
       user.first_name = auth.info.first_name
       user.oauth_token = auth.credentials.token
+      user.password = auth.credentials.token
+      user.password_confirmation = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
       user.save!
       user
