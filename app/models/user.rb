@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessible :active, :email, :last_name, :last_name, :password, :password_confirmation, :picture, :rating, :gender, :dob, :role
+  attr_accessible :active, :email, :first_name, :last_name, :password, :password_confirmation, :picture, :rating, :gender, :dob, :role
 
   # Relationships
   has_many :reviews
