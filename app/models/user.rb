@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
-  attr_accessible :active, :email, :last_name, :last_name, :password, :password_confirmation, :picture, :rating, :gender, :dob, :provider, :uid, :name, :oauth_token, :oauth_expires_at
+  has_secure_password
+  attr_accessible :active, :email, :first_name, :last_name, :password, :password_confirmation, :picture, :rating, :gender, :dob, :provider, :uid, :name, :oauth_token, :oauth_expires_at
 
   # Relationships
 
@@ -17,8 +18,8 @@ class User < ActiveRecord::Base
   ROLES = [['Administrator', :admin], ['Member', :member]]
 
   # Validations
-  validates_presence_of :first_name, :last_name, :dob
-  validates_date :dob, :on_or_before => lambda { Date.new(13.years.ago) }, :message => "You must be older than 13 to use this application."
+  validates_presence_of :first_name, :last_name
+  # validates_date :dob, :on_or_before => lambda { Date.new(13.years.ago) }, :message => "You must be older than 13 to use this application."
   validates_format_of :email, :with => /^([\w]+([^@\s,;])@(andrew\.cmu\.edu))$/i, :message => "Valid CMU ID Required", :allow_blank => false
   validates_uniqueness_of :email, :case_sensitive => false, :allow_blank => false
   validates_numericality_of :rating, :allow_blank => true
@@ -88,8 +89,8 @@ class User < ActiveRecord::Base
   private
 
   def reformat_text
-    self.first_name = self.name.downcase.squish.titleize unless self.first_name.nil?
-    self.last_name = self.name.downcase.squish.titleize unless self.last_name.nil?
+    self.first_name = self.first_name.downcase.squish.titleize unless self.first_name.nil?
+    self.last_name = self.last_name.downcase.squish.titleize unless self.last_name.nil?
   end
 
   def reformat_email
