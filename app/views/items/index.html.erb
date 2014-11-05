@@ -1,23 +1,22 @@
-<table>
-
-<div class="container">
-   <ul class="row">
-	<% @items.each do |item| %>
-	  <tr>
-	  
-	    <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><%= link_to image_tag(item.picture.url, size:"100x100"), item %>
-		<br>
-		<%= item.name %> 
-		<br>
-		$<%= item.price %> 
-		
-		<%= button_tag "Buy"%> 
-	    </td>
-	    
-	  </tr>
-	<% end %>
-   </ul>
-</div>
+<table >
+    <div class="container">
+       <ul class="row" >
+    	<% @items.each do |item| %>
+    	  <tr>
+    	  
+    	    <li class="col-xs-4" style="list-style-type: none" >
+                <%= link_to image_tag(item.picture.url, :border => 10, size:"100x100"), item %>
+    		<br>
+    		<%= item.name %> 
+    		<br>
+    		<%= number_to_currency(item.price) %> 
+    		
+    		<%= button_tag "Buy"%> 
+    	    
+    	  </tr>
+    	<% end %>
+       </ul>
+    </div>
 </table>
 
 <br />
