@@ -14,8 +14,9 @@ gem 'carrierwave'
 gem 'nested_form'
 gem 'tconsole', '1.2.8'
 gem 'cancancan', '~> 1.7'
-gem 'mini_magick'
 gem "omniauth-google-oauth2", "~> 0.2.1"
+gem 'mini_magick'
+
 
 # Gems used only for assets and not required
 # in production environments by default.

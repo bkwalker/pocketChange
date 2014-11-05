@@ -1,13 +1,39 @@
 <!DOCTYPE html>
 <html>
-	<head>
-	  <title>PocketChange</title>
-	  <%= stylesheet_link_tag    "application", :media => "all" %>
-	  <%= javascript_include_tag "application" %>
-	  <%= csrf_meta_tags %>
-	</head>
+<head>
+  <title>PocketChange</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+	  <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</head>
 	<body>
-	    <!-- <div>
+
+		<div class="wrapper">
+		    <div class="container">
+		    <!-- TITLE BAR -->
+		  	<!-- %= link_to(image_tag('amk_titlebar.png'), home_path) % -->
+		  	<!-- NAV BAR -->
+		  	<div class="navbar">
+		  	  <div class="navbar-inner">
+		  	    <div class="container">
+		  	      <%= render :partial => "partials/navigation" %>
+		  	    </div>
+		  	  </div>
+		  	</div>
+		  	</div>
+		  </div>
+	
+			
+
+	    <div>
 	      <% if current_user %>
 	        Signed in as <strong><%= current_user.name %></strong>!
 	        <%= link_to "Sign out", signout_path, id: "sign_out" %>
@@ -18,5 +44,11 @@
 		<div>
 			<%= yield %>
 		</div>
+			<!-- FOOTER -->
+			<footer>
+			  <div class="container">
+				<%= render :partial => "partials/footer"%>
+			  </div>
+			</footer>
 	</body>
 </html>
