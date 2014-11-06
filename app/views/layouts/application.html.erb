@@ -2,6 +2,23 @@
 <html>
 <head>
   <title>PocketChange</title>
+  <table style="color: #428bca; background-color: #000000; width: 100%;  margin-top: -8px;">
+  	<tr>
+  		<td style="text-align: center">
+  			<div>
+		      <% if current_user %>
+		        Signed in as <strong><%= current_user.name %></strong>!
+		        <%= link_to "Sign out", signout_path, id: "sign_out" %>
+		      <% else %>
+		        <%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in" %>
+		      <% end %>
+		    </div> 	
+  		</td>
+  		<td>
+  			<h1 style="text-indent:260px">PocketChange</h1>
+  		</td>
+  	</tr>
+  </table>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
@@ -17,30 +34,21 @@
 	<body>
 
 		<div class="wrapper">
-		    <div class="container">
-		    <!-- TITLE BAR -->
-		  	<!-- %= link_to(image_tag('amk_titlebar.png'), home_path) % -->
-		  	<!-- NAV BAR -->
+		    <div class="container" style="width: 100%; position: absolute; margin: auto; left: 0; background: #004b98; height: 40px;">
 		  	<div class="navbar">
 		  	  <div class="navbar-inner">
 		  	    <div class="container">
-
+				<%= render :partial => "partials/navigation"%>
 		  	    </div>
 		  	  </div>
 		  	</div>
 		  	</div>
 		  </div>
 	
-			
-
-	    <div>
-	      <% if current_user %>
-	        Signed in as <strong><%= current_user.name %></strong>!
-	        <%= link_to "Sign out", signout_path, id: "sign_out" %>
-	      <% else %>
-	        <%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in" %>
-	      <% end %>
-	    </div> 
+			<br>
+			<br>
+		  	<br>
+	    
 		<div>
 			<%= yield %>
 		</div>
