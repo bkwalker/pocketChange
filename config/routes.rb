@@ -1,9 +1,4 @@
 PocketChange::Application.routes.draw do
-  # get "sessions/create"
-
-  # get "sessions/destoy"
-
-  # get "home/show"
 
   resources :book_details
   resources :messages
@@ -35,7 +30,14 @@ PocketChange::Application.routes.draw do
   resources :sessions, only: [:create, :destroy]
   resource :home, only: [:show]
 
-  root :to => 'home#show'
+
+  match 'about' => 'home#about', :as=>:about
+  match 'contact' => 'home#contact', :as=>:contact
+  match 'privacy' => 'home#privacy', :as=>:privacy
+
+  root :to => "home#show"
+
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

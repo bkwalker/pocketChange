@@ -1,21 +1,25 @@
 <table>
-
-<% @items.each do |item| %>
-  <tr>
-  
-    <td><%= link_to image_tag(item.picture.url, size:"100x100"), item %>
-        <br>
-        <%= item.name %> 
-        <br>
-        $<%= item.price %> 
-        
-        <%= button_tag "Buy"%> 
-    </td>
-    
-  </tr>
-<% end %>
+    <div class="container">
+       <ul class="row" >
+    	<% @items.each do |item| %>
+    	  <tr>
+    	  
+    	    <li class="col-xs-4" style="padding-bottom:30pt; padding-left:85pt; list-style-type: none;">
+                <%= link_to image_tag(item.picture.url, size:"120x120"), item %>
+        		<br>
+        		<%= item.name %> 
+        		<br>
+        		<%= number_to_currency(item.price) %> 
+        		
+        		<%= button_tag "Buy"%> 
+    	    </li>
+    	  </tr>
+    	<% end %>
+       </ul>
+    </div>
 </table>
 
 <br />
+
 
 <%= link_to 'New Item', new_item_path %>

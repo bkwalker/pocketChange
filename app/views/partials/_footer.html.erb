@@ -1,0 +1,26 @@
+<style>
+
+#footer {
+	width:100%;
+	height:40px;
+	position:fixed;
+	bottom:0;
+	text-align: center;
+	left:0;
+	background:#00ced1;
+}
+
+</style>
+
+<div id="footer">
+	<%= link_to 'Home', home_path %>&nbsp;&nbsp;::&nbsp;&nbsp;
+        <%= link_to 'About Us', about_path %>&nbsp;&nbsp;::&nbsp;&nbsp;
+        <%= link_to 'Contact Us', contact_path %>&nbsp;&nbsp;::&nbsp;&nbsp;
+	<%= link_to 'Privacy Policy', privacy_path %>&nbsp;&nbsp;::&nbsp;&nbsp;
+	<br />
+	<div id="copy">
+		Webmaster: <%= mail_to("sabatton@andrew.cmu.edu", "Sophie Batton", :encode => "javascript") %> 
+		&nbsp;&nbsp;&copy 2014
+		<p class="supertiny">&nbsp;</p>
+	</div>
+</div>
