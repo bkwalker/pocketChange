@@ -18,8 +18,8 @@ namespace :db do
     user.first_name = "Sherlock"
     user.last_name = "Holmes"
     user.gender = true
-    u.picture.store!(File.open(File.expand_path(profile_picture_path)))
-    user.email = "test@cmu.edu"
+    user.picture.store!(File.open(File.expand_path(profile_picture_path)))
+    user.email = "test@andrew.cmu.edu"
     user.rating = 5
     user.password = "secret"
     user.password_confirmation = "secret"
@@ -39,11 +39,11 @@ namespace :db do
 
     num_users = 40
     puts "putting #{num_users} users into system"
-    num_users.times do |u|
+    num_users.times do |j|
       u = User.new
       u.first_name = Faker::Name.first_name
       u.last_name = Faker::Name.last_name
-      u.email = u.first_name.slice(0) + u.last_name + "@cmu.edu"
+      u.email = u.first_name.slice(0) + u.last_name + "@andrew.cmu.edu"
       u.gender = [true, false].sample
       u.rating = 0
       u.picture.store!(File.open(File.expand_path(profile_picture_path)))
@@ -54,16 +54,18 @@ namespace :db do
       u.save!
 
       num_items = [0,1,2,5,10].sample
-      num_items.times do |i|
+      num_items.times do |k|
+        i = Item.new
         i.user_id = u.id
         i.picture.store!(File.open(File.expand_path(item_picture_path)))
         i.name = item_names.sample
-        i.description = item_discriptions.sample
+        i.description = item_descriptions.sample
         i.price = (0..290).to_a.sample
         i.condition = (0..4).to_a.sample
         i.price_negotiable = [true,false].sample
         i.active = [true, false].sample
         i.sold = i.active ? false : true
+        i.tag = item_tags.sample
 
         num_tags = [0,1,2,5,10].sample
         num_tags.times do |t|
@@ -73,9 +75,10 @@ namespace :db do
       end
   
       num_reviews = [0,1,2,5,10].sample    
-      num_reviews.times do |r|
+      num_reviews.times do |l|
+        r = Review.new
         r.user_id = u.id
-        r.reviewer_id = (1..User.all.count).sample
+        r.reviewer_id = (1..User.all.count).to_a.sample
         r.comments = review_comments.sample
         r.rating = (0..5).to_a.sample
         r.save!
@@ -83,9 +86,11 @@ namespace :db do
 
       # Take average of all ratings for user
       ratings_for_user = Review.find_all_by_user_id(u.id).map{ |r| r.rating}
-      user_rating_sum = ratings_for_user.inject{|sum,x| sum + x }
-      user.rating = user_rating_sum / ratings_for_user.count
-      u.save!
+      if !ratings_for_user.empty?
+        user_rating_sum = ratings_for_user.inject{|sum,x| sum + x }
+        user.rating = user_rating_sum / ratings_for_user.count
+        u.save!
+      end
     end
 
   end

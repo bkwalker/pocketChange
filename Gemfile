@@ -5,14 +5,12 @@ gem 'rails', '3.2.17'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'pg'
-gem 'wirble'
+gem 'pg', '0.17.1'
 gem 'validates_timeliness', '~> 3.0'
 gem 'simple_form'
 gem 'will_paginate'
 gem 'carrierwave'
 gem 'nested_form'
-gem 'tconsole', '1.2.8'
 gem 'cancancan', '~> 1.7'
 gem "omniauth-google-oauth2", "~> 0.2.1"
 gem 'mini_magick'
@@ -37,7 +35,20 @@ group :test do
   gem 'simplecov'
   gem 'turn'
   gem 'single_test'
+  gem 'tconsole'
   gem 'factory_girl_rails'
+end
+
+group :development, :test do
+  gem 'colored'
+  gem 'quiet_assets'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'meta_request'
+  gem 'wirble'
+  gem 'hirb'
+  gem 'faker'
+  gem 'thin'
 end
 
 gem 'jquery-rails'

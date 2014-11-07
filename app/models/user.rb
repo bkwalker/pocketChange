@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
   has_secure_password
   attr_accessible :active, :email, :first_name, :last_name, :password, :password_confirmation, :picture, :rating, :gender, :dob, :provider, :uid, :name, :oauth_token, :oauth_expires_at
 
+  mount_uploader :picture, AvatarUploader
+
   # Relationships
   has_many :reviews
   has_many :items
