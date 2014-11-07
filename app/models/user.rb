@@ -1,8 +1,13 @@
 class User < ActiveRecord::Base
-  attr_accessible :active, :email, :last_name, :last_name, :password, :password_confirmation, :picture, :rating, :gender, :dob, :provider, :uid, :name, :oauth_token, :oauth_expires_at
+  has_secure_password
+  attr_accessible :active, :email, :first_name, :last_name, :password, :password_confirmation, :picture, :rating, :gender, :dob, :provider, :uid, :name, :oauth_token, :oauth_expires_at
+
+  mount_uploader :picture, AvatarUploader
 
   # Relationships
-
+  has_many :reviews
+  has_many :items
+  has_many :locations
 
   # Callbacks
   before_save :reformat_text
@@ -14,21 +19,23 @@ class User < ActiveRecord::Base
   # Lists
   
   # for use in authorizing with CanCan
-  ROLES = [['Administrator', :admin], ['Member', :member]]
+  ROLES = [['Admin', :admin], ['Member', :member]]
 
   # Validations
-  validates_presence_of :first_name, :last_name, :dob
-  validates_date :dob, :on_or_before => lambda { Date.new(13.years.ago) }, :message => "You must be older than 13 to use this application."
-  validates_format_of :email, :with => /^([\w]+([^@\s,;])@(andrew\.cmu\.edu))$/i, :message => "Valid CMU ID Required", :allow_blank => false
+  validates_presence_of :first_name, :last_name
+  # validates_date :dob, :on_or_before => lambda { Date.new(13.years.ago) }, :message => "You must be older than 13 to use this application."
+  validates_format_of :email, :with => /^[\w]([^@\s,;]+)@(andrew.cmu.edu)$/i, :message => "Valid CMU ID Required", :allow_blank => false
   validates_uniqueness_of :email, :case_sensitive => false, :allow_blank => false
-  validates_numericality_of :rating, :allow_blank => true
+  validates_numericality_of :rating, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 5, :allow_blank => true
+  # validates_format_of :rating, :with => /\A\d+(?:\.\d{0,2})?\z/
   validates_inclusion_of :gender, :in => [true, false]
   validates_inclusion_of :active, :in => [true, false]
+  validates_inclusion_of :role, :in => %w[Admin Member], :message => "Unrecognized role given"
 
   # Other methods
-  def name
-    "#{last_name}, #{first_name}"
-  end
+  # def name
+  #   "#{last_name}, #{first_name}"
+  # end
   
   def proper_name
     "#{first_name} #{last_name}"
@@ -69,14 +76,17 @@ class User < ActiveRecord::Base
       user = User.new
       user.provider = auth.provider
       user.email = auth.info.email
-      user.last_name = auth.extra.raw_info.given_name
-      user.dob = 19.years.ago
-      user.gender = true
+      user.last_name = auth.extra.raw_info.family_name
+      user.gender = auth.extra.raw_info.gender = "male" ? true : false
+      user.picture = auth.info.image
       user.active = true
       user.uid = auth.uid
+      user.role = "Member"
       user.name = auth.info.name
       user.first_name = auth.info.first_name
       user.oauth_token = auth.credentials.token
+      user.password = auth.credentials.token
+      user.password_confirmation = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
       user.save!
       user
@@ -88,8 +98,8 @@ class User < ActiveRecord::Base
   private
 
   def reformat_text
-    self.first_name = self.name.downcase.squish.titleize unless self.first_name.nil?
-    self.last_name = self.name.downcase.squish.titleize unless self.last_name.nil?
+    self.first_name = self.first_name.downcase.squish.titleize unless self.first_name.nil?
+    self.last_name = self.last_name.downcase.squish.titleize unless self.last_name.nil?
   end
 
   def reformat_email

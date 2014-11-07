@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141029035246) do
+ActiveRecord::Schema.define(:version => 20141105223311) do
 
   create_table "availabilities", :force => true do |t|
     t.integer  "location_id"
@@ -122,7 +122,7 @@ ActiveRecord::Schema.define(:version => 20141029035246) do
     t.string   "oauth_token"
     t.datetime "oauth_expires_at"
     t.boolean  "gender"
-    t.date     "dob"
+    t.string   "role"
   end
 
 end
