@@ -24,12 +24,16 @@ class ItemsController < ApplicationController
   # GET /items/new
   # GET /items/new.json
   def new
-    @item = Item.new
+    # if current_user
+      @item = Item.new
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @item }
-    end
+      respond_to do |format|
+        format.html # new.html.erb
+        format.json { render json: @item }
+      end
+    # else
+      # redirect_to home_path, notice: 'You have to be logged in to post an item.'
+    # end
   end
 
   # GET /items/1/edit

@@ -76,6 +76,7 @@ class User < ActiveRecord::Base
       user.email = auth.info.email
       user.last_name = auth.extra.raw_info.family_name
       user.gender = auth.extra.raw_info.gender = "male" ? true : false
+      user.picture = auth.info.image
       user.active = true
       user.uid = auth.uid
       user.role = "Member"

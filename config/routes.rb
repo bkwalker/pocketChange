@@ -35,7 +35,7 @@ PocketChange::Application.routes.draw do
   match 'contact' => 'home#contact', :as=>:contact
   match 'privacy' => 'home#privacy', :as=>:privacy
 
-  root :to => "home#show"
+  root to: "items#index", as: 'home'
 
 
 
