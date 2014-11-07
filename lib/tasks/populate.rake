@@ -80,7 +80,7 @@ namespace :db do
         r.user_id = u.id
         r.reviewer_id = (1..User.all.count).to_a.sample
         r.comments = review_comments.sample
-        r.rating = (0..5).to_a.sample
+        r.rating = (1..5).to_a.sample
         r.save!
       end
 
@@ -88,7 +88,7 @@ namespace :db do
       ratings_for_user = Review.find_all_by_user_id(u.id).map{ |r| r.rating}
       if !ratings_for_user.empty?
         user_rating_sum = ratings_for_user.inject{|sum,x| sum + x }
-        user.rating = user_rating_sum / ratings_for_user.count
+        u.rating = user_rating_sum * 1.0 / ratings_for_user.count
         u.save!
       end
     end
