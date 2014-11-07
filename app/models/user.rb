@@ -82,6 +82,7 @@ class User < ActiveRecord::Base
       user.active = true
       user.uid = auth.uid
       user.role = "Member"
+      user.rating = 0
       user.name = auth.info.name
       user.first_name = auth.info.first_name
       user.oauth_token = auth.credentials.token

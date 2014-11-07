@@ -84,13 +84,13 @@ namespace :db do
         r.save!
       end
 
-      # Take average of all ratings for user
-      ratings_for_user = Review.find_all_by_user_id(u.id).map{ |r| r.rating}
-      if !ratings_for_user.empty?
-        user_rating_sum = ratings_for_user.inject{|sum,x| sum + x }
-        u.rating = user_rating_sum * 1.0 / ratings_for_user.count
-        u.save!
-      end
+      # # Take average of all ratings for user
+      # ratings_for_user = Review.find_all_by_user_id(u.id).map{ |r| r.rating}
+      # if !ratings_for_user.empty?
+      #   user_rating_sum = ratings_for_user.inject{|sum,x| sum + x }
+      #   u.rating = user_rating_sum * 1.0 / ratings_for_user.count
+      #   u.save!
+      # end
     end
 
   end
