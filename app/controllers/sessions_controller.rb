@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       notice = "Signed in!"
       logger.debug "URL to redirect to:"
-      redirect_to root_path, :notice => notice
+      redirect_to home_path, :notice => notice
     else
       raise "Failed to login"
     end
@@ -14,6 +14,6 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
-    redirect_to root_path
+    redirect_to home_path
   end
 end

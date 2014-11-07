@@ -18,7 +18,7 @@ namespace :db do
     user.first_name = "Sherlock"
     user.last_name = "Holmes"
     user.gender = true
-    user.picture.store!(File.open(File.expand_path(profile_picture_path)))
+    user.picture = File.open(profile_picture_path)
     user.email = "test@andrew.cmu.edu"
     user.rating = 5
     user.password = "secret"
@@ -46,7 +46,7 @@ namespace :db do
       u.email = u.first_name.slice(0) + u.last_name + "@andrew.cmu.edu"
       u.gender = [true, false].sample
       u.rating = 0
-      u.picture.store!(File.open(File.expand_path(profile_picture_path)))
+      u.picture = File.open(profile_picture_path)
       u.password = "secret"
       u.password_confirmation = "secret"
       u.role = "Admin"
@@ -57,10 +57,10 @@ namespace :db do
       num_items.times do |k|
         i = Item.new
         i.user_id = u.id
-        i.picture.store!(File.open(File.expand_path(item_picture_path)))
+        i.picture = File.open(item_picture_path)
         i.name = item_names.sample
         i.description = item_descriptions.sample
-        i.price = (0..290).to_a.sample
+        i.price = (1..290).to_a.sample
         i.condition = (0..4).to_a.sample
         i.price_negotiable = [true,false].sample
         i.active = [true, false].sample
