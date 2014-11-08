@@ -1,7 +1,11 @@
 class Review < ActiveRecord::Base
   attr_accessible :comments, :rating, :reviewer_id, :user_id
 
+  #Callbacks
   after_save :update_user_rating
+
+  #Relationships
+  belongs_to :user
 
   def update_user_rating
   	u = User.find_by_id(user_id)
