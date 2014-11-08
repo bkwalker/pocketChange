@@ -1,9 +1,4 @@
 PocketChange::Application.routes.draw do
-  # get "sessions/create"
-
-  # get "sessions/destoy"
-
-  # get "home/show"
 
   resources :book_details
   resources :messages
@@ -28,12 +23,21 @@ PocketChange::Application.routes.draw do
 
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/')
-  get 'signout', to: 'sessions#destroy', as: 'signout'
+
+  get 'logout', to: 'sessions#destroy', as: 'logout'
+  get 'login', to: 'sessions#new', as: 'login'
 
   resources :sessions, only: [:create, :destroy]
   resource :home, only: [:show]
 
-  root :to => 'home#show'
+
+  match 'about' => 'home#about', :as=>:about
+  match 'contact' => 'home#contact', :as=>:contact
+  match 'privacy' => 'home#privacy', :as=>:privacy
+
+  root to: "items#index", as: 'home'
+
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
