@@ -49,18 +49,24 @@ namespace :db do
     location_ids = []
 
     num_locations = location_names.count
+    puts "putting #{num_locations} locations into the system"
     num_locations.times do |x|
       l = Location.new
       l.name = location_names.sample
       l.description = location_descriptions.sample
       l.save!
       location_ids.append(l.id)
+    end
 
+    num_location_addresses = num_locations
+    num_location_addresses.times do |y|
       la = LocationAddress.new
-      la.location_id = l.id
+      la.location_id = location_ids.sample
       la.street = location_streets.sample
-      la.city - location_cities.sample
+      la.city = location_cities.sample
+      la.state = location_states.sample
       la.zip = "15289"
+      la.save!
     end
 
     num_users = 40
@@ -87,7 +93,7 @@ namespace :db do
         if rand(4).zero?
           i.location_id = location_ids.sample
         end
-        
+
         i.picture = File.open(item_picture_path)
         i.name = item_names.sample
         i.description = item_descriptions.sample
