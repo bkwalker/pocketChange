@@ -37,6 +37,38 @@ namespace :db do
     review_comments = ["Terrible! Could've gotten better service from a cow.",
       "Awesome! I would recommend this guy.", "Eh. This guy is alright I guess."]
 
+    location_descriptions = ["Behind Tepper", "2 blocks down from 5th on Morewood",
+      "At the top of the hill on Wilkins", "UC black chairs", "Mudge turnaround",
+      "UC turnaround"]
+    location_names = ["UC", "Baker Hall", "The Porch", "My house", "Morewood Gardens"]
+    location_cities = ["Pittsburgh", "Allegheny", "NYC", "Oakland", "Munhall", "Homestead"]
+    location_states = LocationAddress::STATES_LIST.map{ |s| s[1] }
+    location_streets = ["5000 Forbes Avenue", "200 Negley Ave", "1011 Murray Ave.",
+      "909 Highland St."]
+
+    location_ids = []
+
+    num_locations = location_names.count
+    puts "putting #{num_locations} locations into the system"
+    num_locations.times do |x|
+      l = Location.new
+      l.name = location_names.sample
+      l.description = location_descriptions.sample
+      l.save!
+      location_ids.append(l.id)
+    end
+
+    num_location_addresses = num_locations
+    num_location_addresses.times do |y|
+      la = LocationAddress.new
+      la.location_id = location_ids.sample
+      la.street = location_streets.sample
+      la.city = location_cities.sample
+      la.state = location_states.sample
+      la.zip = "15289"
+      la.save!
+    end
+
     num_users = 40
     puts "putting #{num_users} users into system"
     num_users.times do |j|
@@ -57,6 +89,11 @@ namespace :db do
       num_items.times do |k|
         i = Item.new
         i.user_id = u.id
+
+        if rand(4).zero?
+          i.location_id = location_ids.sample
+        end
+
         i.picture = File.open(item_picture_path)
         i.name = item_names.sample
         i.description = item_descriptions.sample
