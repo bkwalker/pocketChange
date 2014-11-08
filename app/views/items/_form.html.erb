@@ -1,3 +1,91 @@
+<style>
+/* Elegant Aero */
+.elegant-aero {
+    margin-left:auto;
+    margin-right:auto;
+
+    max-width: 600px;
+    background: #c0d6e4;
+    padding: 20px 0px 20px 110px;
+    font: 16px Arial, Helvetica, sans-serif;
+    color: #666;
+}
+.elegant-aero h1 {
+    font: 24px "Trebuchet MS", Arial, Helvetica, sans-serif;
+    padding: 10px 10px 10px 20px;
+    display: block;
+    background: #C0E1FF;
+    border-bottom: 1px solid #B8DDFF;
+    margin: -20px -20px 15px;
+}
+.elegant-aero h1>span {
+    display: block;
+    font-size: 11px;
+}
+
+.elegant-aero label>span {
+    float: left;
+    margin-top: 10px;
+    color: #5E5E5E;
+}
+.elegant-aero label {
+    display: inline;
+    margin: 0px 0px 0px;
+}
+.elegant-aero label>span {
+    float: left;
+    width: 20%;
+    text-align: right;
+    padding-right: 15px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+.elegant-aero input[type="text"], .elegant-aero input[type="email"], .elegant-aero textarea, .elegant-aero select {
+    color: #888;
+    width: 70%;
+    padding: 0px 0px 0px 5px;
+    border: 1px solid #C5E2FF;
+    background: #FBFBFB;
+    outline: 0;
+    -webkit-box-shadow:inset 0px 1px 6px #ECF3F5;
+    box-shadow: inset 0px 1px 6px #ECF3F5;
+    font: 200 12px/25px Arial, Helvetica, sans-serif;
+    height: 30px;
+    line-height:15px;
+    margin: 2px 6px 16px 0px;
+}
+.elegant-aero textarea{
+    height:100px;
+    padding: 5px 0px 0px 5px;
+    width: 70%;
+}
+.elegant-aero select {
+    background: #fbfbfb url('down-arrow.png') no-repeat right;
+    background: #fbfbfb url('down-arrow.png') no-repeat right;
+   appearance:none;
+    -webkit-appearance:none; 
+   -moz-appearance: none;
+    text-indent: 0.01px;
+    text-overflow: '';
+    width: 70%;
+}
+.elegant-aero .button{
+    padding: 10px 30px 10px 30px;
+    background: #66C1E4;
+    border: none;
+    color: #FFF;
+    box-shadow: 1px 1px 1px #4C6E91;
+    -webkit-box-shadow: 1px 1px 1px #4C6E91;
+    -moz-box-shadow: 1px 1px 1px #4C6E91;
+    text-shadow: 1px 1px 1px #5079A3;
+    
+}
+.elegant-aero .button:hover{
+    background: #3EB1DD;
+}
+</style>
+
+<h1 style="text-align:center">Create Item</h1>
 <%= simple_form_for(@item) do |f| %>
   <% if @item.errors.any? %>
     <div id="error_explanation">
@@ -10,47 +98,53 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
+  <div class="elegant-aero">
+    <div class="field">
     <%= f.input :user_id, :as => :hidden, :input_html => { :value => current_user.id } %>
-  </div> 
-  <div class="field">
-    <%= f.input :location_id, :as => :hidden, :input_html => { :value => 1 }  %>
-  </div> 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
-    <%= f.label :price %><br />
-    <%= f.text_field :price, :value => "0.00" %>
-  </div>
-  <div class="field">
-    <%= f.file_field :picture %>
-    <%= f.hidden_field :picture_cache %>
-  </div>
-  <div class="field">
-    <%= f.input :price_negotiable, :as => :radio_buttons, :checked => (if (@item.price_negotiable == false) then false else true end ) %>
-  </div>
-  <div class="field">
-    <%= f.label :condition %><br />
-    <%= f.select :condition, Item::CONDITION %>
-  </div>
-  <div class="field">
-    <%= f.input :sold, :as => :hidden, :input_html => { :value => false } %>
-  </div> 
-  <div class="field">
-    <%= f.label :tag %><br />
-    <%= f.text_area :tag %>
-  </div>
-  <div class="field">
-    <%= f.input :active, :as => :hidden, :input_html => { :value => true } %>
-  </div> 
-  <div class="actions">
-    <%= f.submit %>
+    </div> 
+    <div class="field">
+      <%= f.input :location_id, :as => :hidden, :input_html => { :value => 1 }  %>
+    </div> 
+    <div class="field">
+      <%= f.label :name %><br />
+      <%= f.text_field :name %>
+    </div>
+    <div class="field">
+      <%= f.label :description %><br />
+      <%= f.text_area :description %>
+    </div>
+    <div class="field has-error">
+      <%= f.label :price %><br />
+      <%= f.text_field :price, :value => "0.00" %>
+    </div>
+    <div class="field">
+      <%= f.label :picture %><br />
+      <%= f.file_field :picture %>
+      <%= f.hidden_field :picture_cache %><br>
+    </div>
+    <div class="field" style="inline-block">
+      <%= f.input :price_negotiable, :as => :radio_buttons, :checked => (if (@item.price_negotiable == false) then false else true end ) %>
+    </div>
+    <div class="field">
+      <%= f.label :condition %><br />
+      <%= f.select :condition, Item::CONDITION %>
+    </div>
+    <div class="field">
+      <%= f.input :sold, :as => :hidden, :input_html => { :value => false } %>
+    </div> 
+    <div class="field">
+      <%= f.label :tag %><br />
+      <%= f.text_area :tag %>
+    </div>
+    <div class="field">
+      <%= f.input :active, :as => :hidden, :input_html => { :value => true } %>
+    </div> 
+    <div class="actions" style="padding: 0px 0px 0px 110px">
+      <%= f.submit %>
+    </div>
+    
   </div>
 <% end %>
+<br><br>
+<br>
+
