@@ -1,8 +1,17 @@
 FactoryGirl.define do
   
   factory :location do
-    description "This place is super fancy"
     name "Ritz Carlton"
+    description "This place is super fancy"
+  end
+
+  factory :offer do
+    user_id 1
+    item_id 1
+    amount 5.79
+    delivery_method 0
+    pickup_time DateTime.current.tomorrow
+    active true
   end
 
   factory :review do 

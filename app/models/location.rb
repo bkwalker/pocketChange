@@ -1,7 +1,6 @@
 class Location < ActiveRecord::Base
-
   # Remove item_id and user_id from this model, they are not necessary
-  attr_accessible :description, :item_id, :name, :user_id
+  attr_accessible :description, :name
 
   # Relationships
   has_one :location_address

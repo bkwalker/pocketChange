@@ -12,7 +12,8 @@ class Item < ActiveRecord::Base
 
   CONDITION = [["New", 0], ["Like New", 1], ["Good", 2], ["Fair", 3], ["Poor", 4]] 
 
-  validates :user_id, :location_id, :numericality => { only_integer: true, :greater_than => 0 }
+  validates :user_id, :numericality => { only_integer: true, :greater_than => 0 }
+  validates_numericality_of :location_id, :allow_nil => true, :only_integer => true, :greater_than => 0
   validates :price, :numericality => { :greater_than => 0 }
   validates_format_of :price, :with => /\A\d+(?:\.\d{0,2})?\z/
   validates :price_negotiable, :inclusion => {:in => [true, false]}
