@@ -1,7 +1,6 @@
 class Location < ActiveRecord::Base
-
   # Remove item_id and user_id from this model, they are not necessary
-  attr_accessible :description, :item_id, :name, :user_id
+  attr_accessible :description, :name
 
   # Relationships
   has_one :location_address
@@ -16,8 +15,6 @@ class Location < ActiveRecord::Base
   # Lists
 
   # Validations
-  # validates_numericality_of :item_id, :greater_than_or_equal_to => 1, :only_integer => true, :allow_nil => false
-  # validates_numericality_of :user_id, :greater_than_or_equal_to => 1, :only_integer => true, :allow_nil => false
   validates_presence_of :name, :description
 
   # Other methods
