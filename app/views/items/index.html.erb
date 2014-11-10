@@ -4,7 +4,7 @@
 	<% @items.each do |item| %>
     	  <tr>
     	  
-    	    <li class="col-xs-4" style="width: 300px; padding-left: 100pt; padding-right: 100pt; padding-bottom:30pt; list-style-type: none; text-align:center">
+    	    <li class="col-xs-4" style="padding-left: 100pt; padding-right: 100pt; padding-bottom:30pt; list-style-type: none; text-align:center">
                 <%= link_to image_tag(item.picture.url, size:"120x120"), item %>
         		<br>
         		<%= item.name %> 
