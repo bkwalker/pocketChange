@@ -18,7 +18,7 @@ namespace :db do
     user.first_name = "Sherlock"
     user.last_name = "Holmes"
     user.gender = true
-    user.picture.store!(File.open(File.expand_path(profile_picture_path)))
+    user.picture = File.open(profile_picture_path)
     user.email = "test@andrew.cmu.edu"
     user.rating = 5
     user.password = "secret"
@@ -37,6 +37,38 @@ namespace :db do
     review_comments = ["Terrible! Could've gotten better service from a cow.",
       "Awesome! I would recommend this guy.", "Eh. This guy is alright I guess."]
 
+    location_descriptions = ["Behind Tepper", "2 blocks down from 5th on Morewood",
+      "At the top of the hill on Wilkins", "UC black chairs", "Mudge turnaround",
+      "UC turnaround"]
+    location_names = ["UC", "Baker Hall", "The Porch", "My house", "Morewood Gardens"]
+    location_cities = ["Pittsburgh", "Allegheny", "NYC", "Oakland", "Munhall", "Homestead"]
+    location_states = LocationAddress::STATES_LIST.map{ |s| s[1] }
+    location_streets = ["5000 Forbes Avenue", "200 Negley Ave", "1011 Murray Ave.",
+      "909 Highland St."]
+
+    location_ids = []
+
+    num_locations = location_names.count
+    puts "putting #{num_locations} locations into the system"
+    num_locations.times do |x|
+      l = Location.new
+      l.name = location_names.sample
+      l.description = location_descriptions.sample
+      l.save!
+      location_ids.append(l.id)
+    end
+
+    num_location_addresses = num_locations
+    num_location_addresses.times do |y|
+      la = LocationAddress.new
+      la.location_id = location_ids.sample
+      la.street = location_streets.sample
+      la.city = location_cities.sample
+      la.state = location_states.sample
+      la.zip = "15289"
+      la.save!
+    end
+
     num_users = 40
     puts "putting #{num_users} users into system"
     num_users.times do |j|
@@ -46,7 +78,7 @@ namespace :db do
       u.email = u.first_name.slice(0) + u.last_name + "@andrew.cmu.edu"
       u.gender = [true, false].sample
       u.rating = 0
-      u.picture.store!(File.open(File.expand_path(profile_picture_path)))
+      u.picture = File.open(profile_picture_path)
       u.password = "secret"
       u.password_confirmation = "secret"
       u.role = "Admin"
@@ -57,10 +89,15 @@ namespace :db do
       num_items.times do |k|
         i = Item.new
         i.user_id = u.id
-        i.picture.store!(File.open(File.expand_path(item_picture_path)))
+
+        if rand(4).zero?
+          i.location_id = location_ids.sample
+        end
+
+        i.picture = File.open(item_picture_path)
         i.name = item_names.sample
         i.description = item_descriptions.sample
-        i.price = (0..290).to_a.sample
+        i.price = (1..290).to_a.sample
         i.condition = (0..4).to_a.sample
         i.price_negotiable = [true,false].sample
         i.active = [true, false].sample
@@ -80,16 +117,8 @@ namespace :db do
         r.user_id = u.id
         r.reviewer_id = (1..User.all.count).to_a.sample
         r.comments = review_comments.sample
-        r.rating = (0..5).to_a.sample
+        r.rating = (1..5).to_a.sample
         r.save!
-      end
-
-      # Take average of all ratings for user
-      ratings_for_user = Review.find_all_by_user_id(u.id).map{ |r| r.rating}
-      if !ratings_for_user.empty?
-        user_rating_sum = ratings_for_user.inject{|sum,x| sum + x }
-        user.rating = user_rating_sum / ratings_for_user.count
-        u.save!
       end
     end
 

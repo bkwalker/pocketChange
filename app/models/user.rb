@@ -22,12 +22,10 @@ class User < ActiveRecord::Base
   ROLES = [['Admin', :admin], ['Member', :member]]
 
   # Validations
-  validates_presence_of :first_name, :last_name
-  # validates_date :dob, :on_or_before => lambda { Date.new(13.years.ago) }, :message => "You must be older than 13 to use this application."
-  validates_format_of :email, :with => /^[\w]([^@\s,;]+)@(andrew.cmu.edu)$/i, :message => "Valid CMU ID Required", :allow_blank => false
+  validates_presence_of :first_name, :last_name, :email
+  validates_format_of :email, :with => /^[\w]([^@\s,;]+)@((andrew.)?cmu.edu)$/i, :message => "Valid CMU ID Required", :allow_blank => false
   validates_uniqueness_of :email, :case_sensitive => false, :allow_blank => false
   validates_numericality_of :rating, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 5, :allow_blank => true
-  # validates_format_of :rating, :with => /\A\d+(?:\.\d{0,2})?\z/
   validates_inclusion_of :gender, :in => [true, false]
   validates_inclusion_of :active, :in => [true, false]
   validates_inclusion_of :role, :in => %w[Admin Member], :message => "Unrecognized role given"
@@ -78,10 +76,11 @@ class User < ActiveRecord::Base
       user.email = auth.info.email
       user.last_name = auth.extra.raw_info.family_name
       user.gender = auth.extra.raw_info.gender = "male" ? true : false
-      user.picture = auth.info.image
+      user.remote_picture_url = auth.extra.raw_info.picture
       user.active = true
       user.uid = auth.uid
       user.role = "Member"
+      user.rating = 0
       user.name = auth.info.name
       user.first_name = auth.info.first_name
       user.oauth_token = auth.credentials.token

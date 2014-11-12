@@ -1,6 +1,10 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <%= image_tag @user.picture.url, size: '150x150' %>
+</p>
+
+<p>
   <b>First name:</b>
   <%= @user.first_name %>
 </p>
@@ -21,13 +25,8 @@
 </p>
 
 <p>
-  <b>Picture:</b>
-  <%= @user.picture %>
-</p>
-
-<p>
   <b>Rating:</b>
-  <%= @user.rating %>
+  <%= @user.rating.zero? ? "No Rating" : @user.rating %>
 </p>
 
 <p>
