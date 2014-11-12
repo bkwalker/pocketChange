@@ -25,7 +25,7 @@ PocketChange::Application.routes.draw do
   get 'auth/failure', to: redirect('/')
 
   get 'logout', to: 'sessions#destroy', as: 'logout'
-  get 'login', to: 'sessions#new', as: 'login'
+  get 'login', to: 'sessions#create', as: 'login'
 
   resources :sessions, only: [:create, :destroy]
   resource :home, only: [:show]

@@ -11,14 +11,16 @@ class Ability
         #Edit their profile, edit your own items, 
         #view your own conversations, create conversations, edit location of your own item, 
         #can only view reviews and create them
-        can :update, User, :id => current_user.id
-        can :show, User
-        can [:update, :destroy], Item, :user_id => current_user.id
+        can :update, User, :id => user.id
+        can :read, User
+        can [:update, :destroy], Item do |u|
+          u.user_id == user.id
+        end
         can :read, Item
-        can [:update, :show, :destroy], Offer, (:user_id => current_user.id or Item.find_by_id(:item_id).user_id => current_user.id)
+        #can [:update, :show, :destroy], Offer, (:user_id => current_user.id or Item.find_by_id(:item_id).user_id => current_user.id)
         #can [:update, :read, :destroy], 
     else
-        can :create, User  
+        can :create, User 
     end
     #
     # The first argument to `can` is the action you are giving the user

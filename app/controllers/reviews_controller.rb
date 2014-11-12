@@ -1,4 +1,5 @@
 class ReviewsController < ApplicationController
+  authorize_resource
   # GET /reviews
   # GET /reviews.json
   def index

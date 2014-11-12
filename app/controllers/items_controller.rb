@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+  authorize_resource
   # GET /items
   # GET /items.json
   def index

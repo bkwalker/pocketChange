@@ -1,4 +1,5 @@
 class LocationAddressesController < ApplicationController
+  authorize_resource
   # GET /location_addresses
   # GET /location_addresses.json
   def index

@@ -1,4 +1,5 @@
 class MessagesController < ApplicationController
+  authorize_resource
   # GET /messages
   # GET /messages.json
   def index
