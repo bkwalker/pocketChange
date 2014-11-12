@@ -1,5 +1,5 @@
 class BookDetailsController < ApplicationController
-  authorize_resource
+  load_and_authorize_resource
   # GET /book_details
   # GET /book_details.json
   def index

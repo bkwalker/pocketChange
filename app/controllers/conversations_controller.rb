@@ -1,5 +1,5 @@
 class ConversationsController < ApplicationController
-  authorize_resource
+  load_and_authorize_resource
   # GET /conversations
   # GET /conversations.json
   def index

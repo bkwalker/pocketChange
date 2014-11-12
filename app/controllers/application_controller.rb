@@ -1,9 +1,14 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :current_user
+  check_authorization
 
   rescue_from CanCan::AccessDenied do |exception|
-    redirect_to login_path, :alert => exception.message
+    if current_user
+      redirect_to home_path
+    else
+      redirect_to login_path, :alert => exception.message
+    end
   end
 
   def current_user
