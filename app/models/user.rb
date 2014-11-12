@@ -53,11 +53,11 @@ class User < ActiveRecord::Base
   
   # alternative methods (some find more natural...)
   def is_admin?
-    role == 'admin'
+    role == 'Admin'
   end
   
   def is_member?
-    role == 'member'
+    role == 'Member'
   end
 
   # login by email address

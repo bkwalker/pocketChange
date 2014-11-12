@@ -11,6 +11,8 @@ namespace :db do
     puts "All previously made entities have been deleted!"
 
     item_picture_path = "./public/example_files/item.jpeg"
+    item_picture_paths = ["./public/example_files/chair.jpg",
+      "./public/example_files/table.jpg", "./public/example_files/macbook.jpg"]
     profile_picture_path = "./public/example_files/profile.png"
     
     #Create a user
@@ -94,7 +96,7 @@ namespace :db do
           i.location_id = location_ids.sample
         end
 
-        i.picture = File.open(item_picture_path)
+        i.picture = File.open(item_picture_paths.sample)
         i.name = item_names.sample
         i.description = item_descriptions.sample
         i.price = (1..290).to_a.sample

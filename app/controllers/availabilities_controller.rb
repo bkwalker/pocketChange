@@ -1,4 +1,5 @@
 class AvailabilitiesController < ApplicationController
+  load_and_authorize_resource
   # GET /availabilities
   # GET /availabilities.json
   def index

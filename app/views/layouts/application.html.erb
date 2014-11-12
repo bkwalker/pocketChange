@@ -12,8 +12,6 @@
 		      <% if current_user %>
 		        Signed in as <strong><%= link_to current_user.proper_name, user_path(current_user) %></strong>!
 		        <%= link_to "Log out", logout_path, id: "sign_out" %>
-		      <% else %>
-		        <%= link_to "Log in with Google", "/auth/google_oauth2", id: "sign_in" %>
 		      <% end %>
 		    </div> 	
   		</td>
@@ -32,7 +30,7 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </head>
 	<body>
-
+		<% if current_user %>
 		<div class="wrapper">
 		    <div class="container" style="width: 100%; position: absolute; margin: auto; left: 0; background: #004b98; height: 40px;">
 		  	<div class="navbar">
@@ -44,6 +42,7 @@
 		  	</div>
 		  	</div>
 		  </div>
+		  <% end %>
 	
 			<br>
 			<br>
