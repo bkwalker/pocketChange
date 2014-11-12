@@ -5,11 +5,20 @@ class Ability
     # Define abilities for the passed in user here. For example:
     #
     user ||= User.new # guest user (not logged in)
-    if user.admin?
+    if user.is_admin?
         can :manage, :all
-    elsif user.student?
+    elsif user.is_member?
+        #Edit their profile, edit your own items, 
+        #view your own conversations, create conversations, edit location of your own item, 
+        #can only view reviews and create them
+        can :update, User, :id => current_user.id
+        can :show, User
+        can [:update, :destroy], Item, :user_id => current_user.id
+        can :read, Item
+        can [:update, :show, :destroy], Offer, (:user_id => current_user.id or Item.find_by_id(:item_id).user_id => current_user.id)
+        #can [:update, :read, :destroy], 
     else
-        can :read, 
+        can :create, User  
     end
     #
     # The first argument to `can` is the action you are giving the user
