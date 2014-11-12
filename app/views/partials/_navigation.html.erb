@@ -1,7 +1,30 @@
-<div class="nav-collapse">
-  <ul class="nav">
-    <li><%= link_to "Items", items_path %></li>
-    <li><%= link_to "Users", users_path %></li>
-		<!-- <li><%# link_to "Registrations", registrations_path %></li> -->
-  </ul>
-</div>
+<style>
+	
+	ul li { 
+		float: left; 
+		list-style-type: none; 
+		width: 25%;
+		text-align: center;
+		padding-top: 18px;
+	}
+
+	ul li a { 
+		margin-top: -20px;
+		color: white; 
+		display: block; 
+		font-family: Arial, Helvetica, sans-serif; 
+		padding: 10px 20px; 
+		text-align: center;
+		text-decoration: none; 
+	}
+	ul li a:hover { 
+		background: #0069d4; 
+	}
+</style>
+
+<ul class="nav" style="width: 100%; position: absolute; margin: auto; left: 0">
+  <li><%= link_to "Profile", current_user%></a></li>
+  <li><a href="/items">Items</a></li>
+  <li><a href="contact.asp">Contact</a></li>
+  <li><a href="about.asp">About</a></li>
+</ul>
