@@ -4,6 +4,9 @@
   <title>PocketChange</title>
   <table style="color: #428bca; background-color: #000000; width: 100%;  margin-top: -8px;">
   	<tr>
+  		<td>
+  			<h1 style="text-indent:540px">PocketChange</h1>
+  		</td>
   		<td style="text-align: center">
   			<div>
 		      <% if current_user %>
@@ -13,9 +16,6 @@
 		        <%= link_to "Log in with Google", "/auth/google_oauth2", id: "sign_in" %>
 		      <% end %>
 		    </div> 	
-  		</td>
-  		<td>
-  			<h1 style="text-indent:260px">PocketChange</h1>
   		</td>
   	</tr>
   </table>
@@ -38,7 +38,7 @@
 		  	<div class="navbar">
 		  	  <div class="navbar-inner">
 		  	    <div class="container">
-				<%= render :partial => "partials/navigation"%>
+				<%= render :partial => "partials/navigation" %>
 		  	    </div>
 		  	  </div>
 		  	</div>

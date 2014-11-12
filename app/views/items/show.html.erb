@@ -15,7 +15,8 @@
         <b>Price Negotiable:</b><br><br>
     </td>
     <td>
-      <%= User.find_by_id(@item.user_id).proper_name %><br>
+      <%= link_to User.find_by_id(@item.user_id).proper_name, User.find_by_id(@item.user_id) %><br>
+
       <%= number_to_currency(@item.price) %><br>
       <%= @item.condition_name %><br>
       <%= @item.tag %><br>
