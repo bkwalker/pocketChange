@@ -3,12 +3,29 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
-    @items = Item.all
-
+    #@items = Item.all
+    @filterrific = Filterrific.new(Item, params[:filterrific] || session[:filterrific_items])
+    @filterrific.select_options = {sorted_by: Item.options_for_sorted_by}
+    @items = Item.filterrific_find(@filterrific).page(params[:page])
+    session[:filterrific_items] = @filterrific.to_hash
+    
     respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @items }
+      format.html
+      format.js
     end
+
+    rescue ActiveRecord::RecordNotFound => e
+      # There is an issue with the persisted param_set. Reset it.
+      puts "Had to reset filterrific params: #{ e.message }"
+      redirect_to(action: :reset_filterrific, format: :html) and return
+  end
+
+
+  def reset_filterrific
+    # Clear session persistence
+    session[:filterrific_items] = nil
+    # Redirect back to the index action for default filter settings.
+    redirect_to action: :index
   end
 
   # GET /items/1

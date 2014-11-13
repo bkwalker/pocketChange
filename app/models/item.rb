@@ -3,6 +3,13 @@ class Item < ActiveRecord::Base
 
   mount_uploader :picture, AvatarUploader
 
+  filterrific(
+  default_settings: { sorted_by: 'created_at' },
+  filter_names: [
+    :sorted_by
+    ]
+  )
+
   belongs_to :user
   belongs_to :location
   has_many :offers
@@ -28,6 +35,20 @@ class Item < ActiveRecord::Base
   scope :sold, -> { where(sold: false) }
   scope :price_ceiling, -> { where('price <= ?', price) }
 
+  scope :sorted_by, lambda { |sort_option|
+  direction = (sort_option =~ /desc$/) ? 'desc' : 'asc'
+  case sort_option.to_s
+    when /^created_at_/
+      order("items.created_at #{ direction }")
+    when /^price_/
+      order("items.price #{ direction }")
+    when /^condition_/
+      order("items.condition #{ direction }")
+    else
+      raise(ArgumentError, "Invalid sort option: #{ sort_option.inspect }")
+  end
+  }
+
   def condition_name
     condition = self.condition
     if condition == "0"
@@ -46,4 +67,8 @@ class Item < ActiveRecord::Base
 
 
 
+#oldest to newest and backwards
+#low to high and high to low pricewise
+#filter by tag
+#
 end
