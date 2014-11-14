@@ -6,7 +6,7 @@ class ItemsController < ApplicationController
     #@items = Item.all
     @filterrific = Filterrific.new(Item, params[:filterrific] || session[:filterrific_items])
     @filterrific.select_options = {sorted_by: Item.options_for_sorted_by}
-    @items = Item.filterrific_find(@filterrific).page(params[:page])
+    @items = Item.filterrific_find(@filterrific)
     session[:filterrific_items] = @filterrific.to_hash
     
     respond_to do |format|

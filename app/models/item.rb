@@ -4,11 +4,20 @@ class Item < ActiveRecord::Base
   mount_uploader :picture, AvatarUploader
 
   filterrific(
-  default_settings: { sorted_by: 'created_at' },
+  default_settings: { sorted_by: 'created_at_desc' },
   filter_names: [
     :sorted_by
     ]
   )
+
+  def self.options_for_sorted_by
+  [
+    ['Most Recent', 'created_at_asc'],
+    ['Price (Low to High)', 'price_asc'],
+    ['Price (High to Low', 'price_desc'],
+    ['Condition', 'condition_asc']
+  ]
+  end
 
   belongs_to :user
   belongs_to :location
