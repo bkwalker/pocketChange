@@ -6,8 +6,8 @@ class Item < ActiveRecord::Base
   filterrific(
   default_settings: { sorted_by: 'created_at_desc' },
   filter_names: [
-    :sorted_by
-    ]
+    :sorted_by,
+    :search_query]
   )
 
   def self.options_for_sorted_by
@@ -17,6 +17,10 @@ class Item < ActiveRecord::Base
     ['Price (High to Low', 'price_desc'],
     ['Condition', 'condition_asc']
   ]
+  end
+
+  def self.options_for_tags
+
   end
 
   belongs_to :user
@@ -57,6 +61,26 @@ class Item < ActiveRecord::Base
       raise(ArgumentError, "Invalid sort option: #{ sort_option.inspect }")
   end
   }
+
+  scope :search_query, lambda { |query|
+    return nil  if query.blank?
+    # condition query, parse into individual keywords
+    terms = query.downcase.split(/\s+/)
+    # replace "*" with "%" for wildcard searches,
+    # append '%', remove duplicate '%'s
+    terms = terms.map { |e|
+      (e.gsub('*', '%') + '%').gsub(/%+/, '%')
+    }
+    num_or_conds = 2
+    where(
+      terms.map { |term|
+        "(LOWER(items.name) LIKE ? OR LOWER(items.description) LIKE ? )"
+      }.join(' AND '),
+      *terms.map { |e| [e] * num_or_conds }.flatten
+    )
+  }
+
+
 
   def condition_name
     condition = self.condition
