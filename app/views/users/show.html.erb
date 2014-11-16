@@ -31,15 +31,18 @@
        <ul class="row" >
 	<% @user.items.each do |item| %>
     	  <tr>
-    	  
-    	    <li class="col-xs-4" style="padding-bottom:30pt; padding-left:85pt; list-style-type: none;">
+    	    <li class="col-xs-4" style="margin-left:20px; width: 200px; padding-bottom:30pt; list-style-type: none; text-align:center">
+
+              <div style= "border: 1px solid"> 
                 <%= link_to image_tag(item.picture.url, size:"120x120"), item %>
-        		<br>
+              </div>
+        	      <div style= "border: 1px solid; background-color: #B6B6B3">
         		<%= item.name %> 
         		<br>
         		<%= number_to_currency(item.price) %> 
         		
         		<%= button_tag "Buy"%> 
+                      </div>
     	    </li>
     	  </tr>
     	<% end %>
