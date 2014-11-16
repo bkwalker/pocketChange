@@ -21,6 +21,10 @@ PocketChange::Application.routes.draw do
 
   resources :users
 
+  resources :items do
+    get :reset_filterrific, on: :collection
+  end
+
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/')
 

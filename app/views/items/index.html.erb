@@ -1,27 +1,37 @@
-<div class="container col-lg-2">
+<%#
+  Filterrific adds some magic when you use form_for with @filterrific:
+  * adds dom id 'filterrific_filter'
+  * applies javascript behaviors:
+      * AJAX form submission on change
+      * AJAX spinner while AJAX request is being processed
+  * sets form_for options like :url, :method and input name prefix
+%>
+<%= form_for @filterrific do |f| %>
+  <div>
+    Sorted by
+    <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by]) %>
+    <%# See below for the Student.options_for_sorted_by presenter method %>
+  </div>
+  <div>
+    <%= link_to('Reset filters', reset_filterrific_items_path) %>
+  </div>
+  <div>
+    Search
+    <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
+    <%= f.text_field(
+      :search_query,
+      class: 'filterrific-periodically-observed'
+    ) %>
+  </div>
+  <%# add an automated spinner to your form when the list is refreshed %>
+  <%= render_filterrific_spinner %>
+<% end %>
 
+<%= render(
+  partial: 'items/items_list',
+  locals: { items: @items }
+) %>
+
+<div class="container">
+    <%= link_to 'New Item', new_item_path %>
 </div>
-<div class="container col-lg-10">
-    <table>
-       <ul class="row" >
-
-	<% @items.each do |item| %>
-    	  <tr>
-    	    <li class="col-lg-3" style="padding-top: 30pt; list-style-type: none; text-align:center">
-        	<div style= "border: 1px solid">       
-		<%= link_to image_tag(item.picture.url, size:"120x120"), item %>
-		</div>
-			<div style= "border: 1px solid; background-color: #B6B6B3">
-        		<%= item.name %> 
-        		<br>
-        		<%= number_to_currency(item.price) %> 		
-			</div>
-    	    </li>
-    	  </tr>
-          <% end %>
-       </ul>
-    </table>
-</div>
-
-
-

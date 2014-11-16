@@ -3,6 +3,26 @@ class Item < ActiveRecord::Base
 
   mount_uploader :picture, AvatarUploader
 
+  filterrific(
+  default_settings: { sorted_by: 'created_at_desc' },
+  filter_names: [
+    :sorted_by,
+    :search_query]
+  )
+
+  def self.options_for_sorted_by
+  [
+    ['Most Recent', 'created_at_asc'],
+    ['Price (Low to High)', 'price_asc'],
+    ['Price (High to Low', 'price_desc'],
+    ['Condition', 'condition_asc']
+  ]
+  end
+
+  def self.options_for_tags
+
+  end
+
   belongs_to :user
   belongs_to :location
   has_many :offers
@@ -28,6 +48,40 @@ class Item < ActiveRecord::Base
   scope :sold, -> { where(sold: false) }
   scope :price_ceiling, -> { where('price <= ?', price) }
 
+  scope :sorted_by, lambda { |sort_option|
+  direction = (sort_option =~ /desc$/) ? 'desc' : 'asc'
+  case sort_option.to_s
+    when /^created_at_/
+      order("items.created_at #{ direction }")
+    when /^price_/
+      order("items.price #{ direction }")
+    when /^condition_/
+      order("items.condition #{ direction }")
+    else
+      raise(ArgumentError, "Invalid sort option: #{ sort_option.inspect }")
+  end
+  }
+
+  scope :search_query, lambda { |query|
+    return nil  if query.blank?
+    # condition query, parse into individual keywords
+    terms = query.downcase.split(/\s+/)
+    # replace "*" with "%" for wildcard searches,
+    # append '%', remove duplicate '%'s
+    terms = terms.map { |e|
+      (e.gsub('*', '%') + '%').gsub(/%+/, '%')
+    }
+    num_or_conds = 2
+    where(
+      terms.map { |term|
+        "(LOWER(items.name) LIKE ? OR LOWER(items.description) LIKE ? )"
+      }.join(' AND '),
+      *terms.map { |e| [e] * num_or_conds }.flatten
+    )
+  }
+
+
+
   def condition_name
     condition = self.condition
     if condition == "0"
@@ -43,4 +97,8 @@ class Item < ActiveRecord::Base
     end
   end
 
+#oldest to newest and backwards
+#low to high and high to low pricewise
+#filter by tag
+#
 end

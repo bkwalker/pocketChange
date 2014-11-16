@@ -1,0 +1,19 @@
+<div class="container col-lg-2"></div>
+
+<div class="filterrific_results container col-lg-10">
+   <ul class="row" >
+        <% @items.each do |item| %>
+            <li class="col-lg-3" style="padding-top: 30pt; list-style-type: none; text-align:center">
+            <div style= "border: 1px solid">       
+                <%= link_to image_tag(item.picture.url, size:"120x120"), item %>
+            </div>
+            
+            <div style= "border: 1px solid; background-color: #B6B6B3">
+                <%= item.name %> 
+               <br>
+                <%= number_to_currency(item.price) %>     
+            </div>
+            </li>
+        <% end %>
+   </ul>
+</div>

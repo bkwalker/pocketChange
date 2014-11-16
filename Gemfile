@@ -14,6 +14,8 @@ gem 'nested_form'
 gem 'cancancan', '~> 1.7'
 gem "omniauth-google-oauth2", "~> 0.2.1"
 gem 'mini_magick'
+gem 'filterrific'
+gem 'acts-as-taggable-on', '~> 3.4'
 
 
 # Gems used only for assets and not required
