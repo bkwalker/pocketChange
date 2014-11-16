@@ -1,26 +1,24 @@
-<table>
-    <div class="container">
+<div class="container col-lg-2">
+
+</div>
+<div class="container col-lg-10">
+    <table>
        <ul class="row" >
+
 	<% @items.each do |item| %>
     	  <tr>
-    	  
-    	    <li class="col-xs-4" style="margin-left:1.8%; width: 300px; padding-bottom:30pt; list-style-type: none; text-align:center">
+    	    <li class="col-lg-3" style="padding-top: 30pt; list-style-type: none; text-align:center">
                 <%= link_to image_tag(item.picture.url, size:"120x120"), item %>
         		<br>
         		<%= item.name %> 
         		<br>
-        		<%= number_to_currency(item.price) %> 
-        		
+        		<%= number_to_currency(item.price) %> 		
     	    </li>
     	  </tr>
           <% end %>
        </ul>
-    </div>
-</table>
-
-
-
-
-<div class="container">
-    <%= link_to 'New Item', new_item_path %>
+    </table>
 </div>
+
+
+

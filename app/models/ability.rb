@@ -13,7 +13,7 @@ class Ability
         #can only view reviews and create them
         can :update, User, :id => user.id
         can :read, User
-        can [:update, :destroy], Item, :user_id => user.id
+        can [:update, :create, :edit, :destroy], Item, :user_id => user.id
         can :read, Item
         #can [:update, :show, :destroy], Offer, (:user_id => current_user.id or Item.find_by_id(:item_id).user_id => current_user.id)
         #can [:update, :read, :destroy], 
