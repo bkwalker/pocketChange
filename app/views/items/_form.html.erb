@@ -122,7 +122,7 @@
       <%= f.file_field :picture %>
       <%= f.hidden_field :picture_cache %><br>
     </div>
-    <div class="field" style="inline-block">
+    <div class="field">
       <%= f.input :price_negotiable, :as => :radio_buttons, :checked => (if (@item.price_negotiable == false) then false else true end ) %>
     </div>
     <div class="field">
