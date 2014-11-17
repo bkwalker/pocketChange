@@ -8,19 +8,14 @@
   			<h1 style="text-indent:10px"><%= link_to "PocketChange", items_path %></h1>
   		</td>
   		<td>
-  			<div>
-  				<%= form_for @filterrific do |f| %>
-		        	Search
-			        <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
-			        <%= f.text_field(:search_query, class: 'filterrific-periodically-observed') %>
-		        <% end %>
-		    </div>
   		</td>
   		<td style="text-align: right; text-ident: 10%">
   			<div>
 		      <% if current_user %>
 		        Signed in as <strong><%= link_to current_user.proper_name, user_path(current_user) %></strong>!
 		        <%= link_to "Log out", logout_path, id: "sign_out" %>&nbsp&nbsp&nbsp&nbsp
+		        <% else %>
+		            <%= link_to "Log in with Google", "/auth/google_oauth2", id: "sign_in" %>&nbsp&nbsp&nbsp&nbsp
 		      <% end %>
 		    </div> 	
   		</td>
