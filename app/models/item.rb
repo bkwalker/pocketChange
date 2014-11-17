@@ -69,7 +69,7 @@ class Item < ActiveRecord::Base
     # replace "*" with "%" for wildcard searches,
     # append '%', remove duplicate '%'s
     terms = terms.map { |e|
-      (e.gsub('*', '%') + '%').gsub(/%+/, '%')
+      ('%' + e.gsub('*', '%') + '%').gsub(/%+/, '%')
     }
     num_or_conds = 2
     where(
