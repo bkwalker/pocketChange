@@ -6,19 +6,12 @@
       * AJAX spinner while AJAX request is being processed
   * sets form_for options like :url, :method and input name prefix
 %>
-<div class="container col-lg-2">
+<div class="container col-lg-1">
 
   <%= form_for @filterrific do |f| %>
       <%= link_to 'New Item', new_item_path %>
 
-      <div>
-        Search
-        <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
-        <%= f.text_field(
-          :search_query,
-          class: 'filterrific-periodically-observed'
-        ) %>
-      </div>
+      
       
       <%# add an automated spinner to your form when the list is refreshed %>
       <%= render_filterrific_spinner %>
@@ -35,7 +28,7 @@
   <% end %>
 </div>
 
-<div class="container col-lg-10">
+<div class="container col-lg-11">
 
     <%= render(
         partial: 'items/items_list',
