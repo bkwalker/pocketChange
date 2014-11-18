@@ -6,19 +6,53 @@
       * AJAX spinner while AJAX request is being processed
   * sets form_for options like :url, :method and input name prefix
 %>
+<style>
+   .round-button {
+    display:block;
+    width:100px;
+    height:30px;
+    line-height:30px;
+    border: 2px solid #000000;
+    color:#000000;
+    text-align:center;
+    text-decoration:none;
+    background: #B6B6B3;
+    box-shadow: 0 0 3px gray;
+    font-size:20px;
+}
+.round-button:hover {
+    background: #000000;
+}
+ #whatever div {
+  display: inline;
+  margin: 0 1em 0 1em;
+  width: 30%;
+}
+</style>
+
+<div class="whatever col-lg-10" style="display:block">
+    <%= form_for @filterrific do |f| %>
+
+        <div style="diplay: inline; margin:0 auto; padding-top: 1%; padding-left: 20%">
+            <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
+            <%= f.text_field(
+              :search_query, 
+              class: 'filterrific-periodically-observed', :size => "133%", :placeholder =>"Search..."
+            ) %>
+        </div>
+    <% end %>
+</div>
+<div class = "whatever col-lg-2" style="padding-top: .8%; padding-left: 7%">
+    <a href="/items/new" class="round-button">Post Item</a></div>
+</div>
+
+
 <div class="container col-lg-1">
 
   <%= form_for @filterrific do |f| %>
-      <%= link_to 'New Item', new_item_path %>
+      
 
-      <div>
-        Search
-        <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
-        <%= f.text_field(
-          :search_query,
-          class: 'filterrific-periodically-observed'
-        ) %>
-      </div>
+     
       
       <%# add an automated spinner to your form when the list is refreshed %>
       <%= render_filterrific_spinner %>
