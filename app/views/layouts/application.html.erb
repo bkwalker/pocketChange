@@ -2,14 +2,14 @@
 <html>
 <head>
   <title>PocketChange</title>
-  <table style="color: #428bca; background-color: #000000; width: 100%;  margin-top: -8px;">
+  <table style="color: #428bca; background-color: #DEDEDE; width: 100%;  margin-top: -8px;">
   	<tr>
   		<td>
   			<h1 style="text-indent:10px"><%= link_to "PocketChange", items_path %></h1>
   		</td>
   		<td>
   		</td>
-  		<td style="text-align: right; text-ident: 10%">
+  		<td style="text-align: right; text-ident: 10%; color:#000000">
   			<div>
 		      <% if current_user %>
 		        Signed in as <strong><%= link_to current_user.proper_name, user_path(current_user) %></strong>!
