@@ -123,6 +123,9 @@
       <%= f.hidden_field :picture_cache %><br>
     </div>
     <div class="field">
+      <%= f.input :payment_method, :as => :hidden, :label => "Payment Method: ", :collection => Item::PAYMENT_METHODS, :selected => "0", :required => true %>
+    </div>
+    <div class="field">
       <%= f.input :price_negotiable, :as => :radio_buttons, :checked => (if (@item.price_negotiable == false) then false else true end ) %>
     </div>
     <div class="field">
