@@ -1,3 +1,11 @@
+      <!-- Modal -->
+      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+              <h3 class="modal-title" id="myModalLabel">Make an Offer</h3>
+            </div>
 <div class="modal-body">  
   <%= simple_form_for @offer, :html => { id: '#myOfferForm' } do |f| %>
     <% if @offer.errors.any? %>
@@ -13,7 +21,7 @@
     <% end %>
 
     <div class="field">
-      <%= f.input :item_id, :as => :hidden, :input_html => { :value => @item.id } %>
+      <%= f.input :item_id, :as => :hidden, :input_html => { :value => (@item.nil? ? item.id : @item.id) } %>
     </div>
     <div class="field">
       <%= f.input :item_id, :as => :hidden, :input_html => { :value => current_user.id } %>
@@ -41,9 +49,12 @@
     <div class="modal-footer">
       <div class="actions">
         <div data-dismiss="modal">
-        <%= f.submit "Make Offer", :class => 'btn btn-success', :id => 'myOfferSubmit' %>
+          <%= f.submit "Make Offer", :class => 'btn btn-success myOfferSubmit' %>
         </div>
       </div>
     </div>
   <% end %>
+            </div>
+        </div>
+      </div>
 

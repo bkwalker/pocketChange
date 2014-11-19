@@ -30,6 +30,7 @@
     <div class="container">
        <ul class="row" >
 	<% @user.items.each do |item| %>
+  <% @item = item %>
     	  <tr>
     	    <li class="col-xs-4" style="margin-left:20px; width: 200px; padding-bottom:30pt; list-style-type: none; text-align:center">
 
@@ -41,7 +42,11 @@
         		<br>
         		<%= number_to_currency(item.price) %> 
         		
-        		<%= button_tag "Buy"%> 
+        		      <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal">
+        Buy
+      </button>
+
+      <%= render 'offers/form', :locals => { :item => @item } %>  
                       </div>
     	    </li>
     	  </tr>

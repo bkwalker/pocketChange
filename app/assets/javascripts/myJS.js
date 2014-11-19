@@ -1,6 +1,6 @@
-// $(document).ready(function () {
-//     $('.myOfferSubmit').click(function() {
-//         $('#myOfferSubmit').submit()
-//         return false;  // cancel the initial submit event
-//     });
-// });
+$(document).ready(function () {
+    $('#myOfferSubmit').click(function() {
+        $('#myOfferForm').submit();
+        return false;  // cancel the initial submit event
+    }, false);
+});
