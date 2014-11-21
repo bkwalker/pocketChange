@@ -19,7 +19,11 @@
       <%= @user.last_name %><br> 
       <%= @user.email %><br>
       <%= @user.rating %><br>
+      <%= show_stars @user %>
+
     </td>
+
+
   </tr>
 </table>
 <br>
@@ -31,7 +35,8 @@
     	  <div>
 			<b><%= User.find_by_id(review.reviewer_id).proper_name %></b>
 			<br>   		
-			<%= review.rating %> 
+			<%= review.rating %>
+			<%= review_show_stars review %> 
         		<br>
         		<%= review.comments %> 
 			<br><br>
