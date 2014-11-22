@@ -2,10 +2,10 @@
 <html>
 <head>
   <title>PocketChange</title>
-  <table style="color: #428bca; background-color: #DEDEDE; width: 100%;  margin-top: -8px;">
+  <table style="color: #428bca; background-color: #ffffff; width: 100%;  margin-top: -8px;">
   	<tr>
   		<td>
-  			<h1 style="text-indent:10px"><%= link_to "PocketChange", items_path %></h1>
+  			<h1 id="ourTitle" style="text-indent:10px"><%= link_to "PocketChange", items_path %></h1>
   		</td>
   		<td>
   		</td>
@@ -22,6 +22,8 @@
   	</tr>
   </table>
   <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= stylesheet_link_tag    "our_style" %>
+
   <%= javascript_include_tag "application" %>
 
 
