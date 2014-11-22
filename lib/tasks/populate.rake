@@ -29,6 +29,14 @@ namespace :db do
     user.active = true
     user.save!
 
+    items = [["Redwood Table", "./public/example_files/redwood_table.jpg", 50],
+      ["Black Sofa", "./public/example_files/black_sofa.jpg", 115],
+      ["Purple Couch","./public/example_files/pruple_couch.jpg", 127],
+      ["Macbook Pro", "./public/example_files/macbook.jpg", 320],
+      ["iPad Mini 2 Retina", "./public/example_files/ipad_mini.jpg", 112],
+      ["Cherrywood Nighstand", "./public/example_files/cherrywood_nightstand.jpg", 30],
+      ["Maple Coffee Table", "./public/example_files/table.jpg", 20]]
+
     item_names = ["Redwood Table", "Black Sofa", "Purple Couch", "Macbook Pro",
       "iPad Mini 2 Retina", "Cherrywood Night Stand", "Maple Coffee Table"]
     item_descriptions = ["Buy me or don't buy me, but I'm going to sell.",
@@ -91,15 +99,16 @@ namespace :db do
       num_items.times do |k|
         i = Item.new
         i.user_id = u.id
+        item = items.sample
 
         if rand(4).zero?
           i.location_id = location_ids.sample
         end
 
-        i.picture = File.open(item_picture_paths.sample)
-        i.name = item_names.sample
+        i.picture = File.open(item[1].sample)
+        i.name = item[0]
         i.description = item_descriptions.sample
-        i.price = (1..290).to_a.sample
+        i.price = item[2]
         i.condition = (0..4).to_a.sample
         i.price_negotiable = [true,false].sample
         i.active = [true, false].sample
