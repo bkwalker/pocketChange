@@ -6,51 +6,15 @@
       * AJAX spinner while AJAX request is being processed
   * sets form_for options like :url, :method and input name prefix
 %>
-<style>
-   .round-button {
-    display:block;
-    width:100px;
-    height:30px;
-    line-height:30px;
-    border: 2px solid #000000;
-    color:#000000;
-    text-align:center;
-    text-decoration:none;
-    background: #B6B6B3;
-    box-shadow: 0 0 3px gray;
-    font-size:20px;
-}
-.round-button:hover {
-    background: #000000;
-}
- #whatever div {
-  display: inline;
-  margin: 0 1em 0 1em;
-  width: 10%;
-}
-
-#myDiv {
-  width: 20%;
-}
-
-#filterrific_search_query {
-  width: 70%;
-}
-
-#filterrific_sorted_by {
-  margin-right: 2%;
-  width: 10%;
-}
-</style>
 
 <div class="myDiv col-lg-12">
     <%= form_for @filterrific do |f| %>
-
+        <br>
         <div style="diplay: inline; margin:0 auto; padding-top: 1%; padding-left: 20%">
             <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
             Search <%= f.text_field(
               :search_query, 
-              class: 'filterrific-periodically-observed', :size => "133%", :placeholder =>"Search..."
+              class: 'filterrific-periodically-observed form-control', :size => "133%", :placeholder =>"Search..."
             ) %>
             <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by]) %>
             <a href="/items/new" class="btn btn-primary">Post Item</a>
@@ -59,7 +23,7 @@
 </div>
 
 <div class="container col-lg-12">
-
+    <div class="col-lg-2"></div>
     <%= render(
         partial: 'items/items_list',
         locals: { items: @items }
