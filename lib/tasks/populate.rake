@@ -29,13 +29,13 @@ namespace :db do
     user.active = true
     user.save!
 
-    items = [["Redwood Table", "./public/example_files/redwood_table.jpg", 50],
-      ["Black Sofa", "./public/example_files/black_sofa.jpg", 115],
-      ["Purple Couch","./public/example_files/pruple_couch.jpg", 127],
-      ["Macbook Pro", "./public/example_files/macbook.jpg", 320],
-      ["iPad Mini 2 Retina", "./public/example_files/ipad_mini.jpg", 112],
-      ["Cherrywood Nighstand", "./public/example_files/cherrywood_nightstand.jpg", 30],
-      ["Maple Coffee Table", "./public/example_files/table.jpg", 20]]
+    items = [["Redwood Table", "./public/example_files/redwood_table.jpg", (50..150).to_a],
+      ["Black Sofa", "./public/example_files/black_sofa.jpg", (115..300).to_a],
+      ["Purple Couch","./public/example_files/purple_couch.jpg", (127..400).to_a],
+      ["Macbook Pro", "./public/example_files/macbook.jpg", (320..1000).to_a],
+      ["iPad Mini 2 Retina", "./public/example_files/ipad_mini.jpg", (112..400).to_a],
+      ["Cherrywood Nighstand", "./public/example_files/cherrywood_nightstand.jpg", (30..112).to_a],
+      ["Maple Coffee Table", "./public/example_files/table.jpg", (20..120).to_a]]
 
     item_names = ["Redwood Table", "Black Sofa", "Purple Couch", "Macbook Pro",
       "iPad Mini 2 Retina", "Cherrywood Night Stand", "Maple Coffee Table"]
@@ -105,10 +105,10 @@ namespace :db do
           i.location_id = location_ids.sample
         end
 
-        i.picture = File.open(item[1].sample)
+        i.picture = File.open(item[1])
         i.name = item[0]
         i.description = item_descriptions.sample
-        i.price = item[2]
+        i.price = item[2].sample
         i.condition = (0..4).to_a.sample
         i.price_negotiable = [true,false].sample
         i.active = [true, false].sample
