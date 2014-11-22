@@ -1,5 +1,21 @@
- <div>
-  <% if !current_user %>
-    <%= link_to "Log in with Google", "/auth/google_oauth2", id: "sign_in" %>
-  <% end %>
-</div>
+<html>
+  <style>
+    body {
+      background-color: #fff;
+    }
+  </style>
+	<head>	
+		<table style="background-color: #E6E5E0; width: 100%; margin-top: 5%">
+	  		<tr>
+	  			<td style="width:50%; padding-left: 14%; padding-right: 10%; padding-bottom: 12%; padding-top: 4%">
+	  				<h1 id="introText">Quickly Buy and Sell your goods locally at Carnegie Mellon</h1><br>
+	  			</td>
+
+	  			<td>
+					<%= image_tag("piggy_bank.png", size:"375x375", id:"homeImage") %>  			
+				  </td>
+	  		
+	  		</tr>
+	  	</table>
+  </head>
+</html>

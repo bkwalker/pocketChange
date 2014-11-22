@@ -1,17 +1,16 @@
-<div id="filterrific_results" class="container">
-   <ul class="row" >
-        <% @items.each do |item| %>
-            <li class="col-lg-3" style="padding-top: 30pt; list-style-type: none; text-align:center">
-            <div style= "border: 1px solid">       
-                <%= link_to image_tag(item.picture.url, size:"120x120"), item %>
-            </div>
-            
-            <div style= "border: 1px solid; background-color: #B6B6B3">
-                <%= item.name %> 
-               <br>
-                <%= number_to_currency(item.price) %>     
-            </div>
-            </li>
-        <% end %>
-   </ul>
+<div id="filterrific_results" class="container col-lg-10">
+    <br>
+    <br>
+    <% @items.each do |item| %>
+        <div class="col-lg-2 myPanel" style="text-align:center">
+          <div>       
+              <%= link_to image_tag(item.picture.url, class:"image-size"), item %>
+          </div>
+          
+          <div style="text-align:left">
+              <h5><%= link_to item.name, item_path(item) %></h5>
+              <h4><%= number_to_currency(item.price) %></h4>
+          </div>
+        </div>
+    <% end %>
 </div>

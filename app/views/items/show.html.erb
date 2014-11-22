@@ -3,7 +3,7 @@
 <table style="padding-left:40px">
   <tr>
     <td>
-        <%= image_tag(@item.picture.url, size:"150x150") %>
+        <%= image_tag(@item.picture.url, class:"item-size") %>
     </td>
     <td style="width:50px">
     </td>
@@ -21,7 +21,13 @@
       <%= @item.condition_name %><br>
       <%= @item.tag %><br>
       <%= @item.price_negotiable ? "Yes" : "No"  %><br>
-      <%= button_tag "Buy"%> 
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal">
+        Buy
+      </button>
+
+      <%= render 'offers/form' %>            
+
     </td>
   </tr>
 </table>

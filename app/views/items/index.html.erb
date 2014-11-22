@@ -6,37 +6,24 @@
       * AJAX spinner while AJAX request is being processed
   * sets form_for options like :url, :method and input name prefix
 %>
-<div class="container col-lg-2">
 
-  <%= form_for @filterrific do |f| %>
-      <%= link_to 'New Item', new_item_path %>
-
-      <div>
-        Search
-        <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
-        <%= f.text_field(
-          :search_query,
-          class: 'filterrific-periodically-observed'
-        ) %>
-      </div>
-      
-      <%# add an automated spinner to your form when the list is refreshed %>
-      <%= render_filterrific_spinner %>
-
-      <div>
-        Sorted by
-          <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by]) %>
-        <%# See below for the Student.options_for_sorted_by presenter method %>
-      </div>
-    
-      <div>
-        <%= link_to('Reset filters', reset_filterrific_items_path) %>
-      </div>
-  <% end %>
+<div class="myDiv col-lg-12">
+    <%= form_for @filterrific do |f| %>
+        <br>
+        <div style="diplay: inline; margin:0 auto; padding-top: 1%; padding-left: 20%">
+            <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
+            Search <%= f.text_field(
+              :search_query, 
+              class: 'filterrific-periodically-observed form-control', :size => "133%", :placeholder =>"Search..."
+            ) %>
+            <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by]) %>
+            <a href="/items/new" class="btn btn-primary">Post Item</a>
+        </div>
+    <% end %>
 </div>
 
-<div class="container col-lg-10">
-
+<div class="container col-lg-12">
+    <div class="col-lg-2"></div>
     <%= render(
         partial: 'items/items_list',
         locals: { items: @items }
