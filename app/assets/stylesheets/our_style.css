@@ -40,13 +40,22 @@ body {
   width: 10%;
 }
 
-#ourTitle {
-  margin-left: 3%;
-  font-size: 3em;
+#homeImage {
+  margin-top: 5%;
+  margin-left: 10%;
 }
 
 #introText {
-  font-size: 3.3em;
+  font-size: 3.7em;
+  font-family: Helvetica;
+  text-align: left;
+  margin-left:20%;
+}
+
+#ourTitle {
+  margin-left: 3%;
+  font-size: 3em;
+  text-decoration:underline;
 }
 
 #sign_in {
