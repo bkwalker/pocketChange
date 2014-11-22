@@ -117,7 +117,7 @@ namespace :db do
       num_reviews.times do |l|
         r = Review.new
         r.user_id = u.id
-        r.reviewer_id = (1..User.all.count).to_a.sample
+        r.reviewer_id = User.all.map{|u| u.id}.to_a.sample
         r.comments = review_comments.sample
         r.rating = (1..5).to_a.sample
         r.save!
