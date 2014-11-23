@@ -31,6 +31,8 @@ class Item < ActiveRecord::Base
   validates_presence_of :name, :description, :picture, :condition, :user_id, :price, :tag
 
   CONDITION = [["New", 0], ["Like New", 1], ["Good", 2], ["Fair", 3], ["Poor", 4]] 
+  DELIVERY_METHODS = [["Pick-up", 0], ["Meet-up", 1]]
+
 
   validates :user_id, :numericality => { only_integer: true, :greater_than => 0 }
   validates_numericality_of :location_id, :allow_nil => true, :only_integer => true, :greater_than => 0

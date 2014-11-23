@@ -3,10 +3,10 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
-    #@items = Item.all
+    # @items = Item.all
     @filterrific = Filterrific.new(Item, params[:filterrific] || session[:filterrific_items])
     @filterrific.select_options = {sorted_by: Item.options_for_sorted_by}
-    @items = Item.filterrific_find(@filterrific).page(params[:page])
+    @items = Item.filterrific_find(@filterrific)
     session[:filterrific_items] = @filterrific.to_hash
     
     respond_to do |format|
@@ -32,6 +32,7 @@ class ItemsController < ApplicationController
   # GET /items/1.json
   def show
     @item = Item.find(params[:id])
+    @offer = Offer.new
 
     respond_to do |format|
       format.html # show.html.erb

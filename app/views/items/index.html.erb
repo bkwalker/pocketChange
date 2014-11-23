@@ -6,71 +6,24 @@
       * AJAX spinner while AJAX request is being processed
   * sets form_for options like :url, :method and input name prefix
 %>
-<style>
-   .round-button {
-    display:block;
-    width:100px;
-    height:30px;
-    line-height:30px;
-    border: 2px solid #000000;
-    color:#000000;
-    text-align:center;
-    text-decoration:none;
-    background: #B6B6B3;
-    box-shadow: 0 0 3px gray;
-    font-size:20px;
-}
-.round-button:hover {
-    background: #000000;
-}
- #whatever div {
-  display: inline;
-  margin: 0 1em 0 1em;
-  width: 30%;
-}
-</style>
 
-<div class="whatever col-lg-10" style="display:block">
+<div class="myDiv col-lg-12">
     <%= form_for @filterrific do |f| %>
-
-        <div style="diplay: inline; margin:0 auto; padding-top: 1%; padding-left: 20%">
+        <br>
+        <div id="searchContainer">
             <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
-            <%= f.text_field(
+            Search <%= f.text_field(
               :search_query, 
-              class: 'filterrific-periodically-observed', :size => "133%", :placeholder =>"Search..."
+              class: 'filterrific-periodically-observed form-control', :size => "133%", :placeholder =>"Search..."
             ) %>
+            <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by]) %>
+            <a href="/items/new" class="btn btn-primary">Post Item</a>
         </div>
     <% end %>
 </div>
-<div class = "whatever col-lg-2" style="padding-top: .8%; padding-left: 7%">
-    <a href="/items/new" class="round-button">Post Item</a></div>
-</div>
 
-
-<div class="container col-lg-1">
-
-  <%= form_for @filterrific do |f| %>
-      
-
-     
-      
-      <%# add an automated spinner to your form when the list is refreshed %>
-      <%= render_filterrific_spinner %>
-
-      <div>
-        Sorted by
-          <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by]) %>
-        <%# See below for the Student.options_for_sorted_by presenter method %>
-      </div>
-    
-      <div>
-        <%= link_to('Reset filters', reset_filterrific_items_path) %>
-      </div>
-  <% end %>
-</div>
-
-<div class="container col-lg-11">
-
+<div class="container col-lg-12">
+    <div class="col-lg-2"></div>
     <%= render(
         partial: 'items/items_list',
         locals: { items: @items }

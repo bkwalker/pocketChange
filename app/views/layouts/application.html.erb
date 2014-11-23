@@ -2,14 +2,14 @@
 <html>
 <head>
   <title>PocketChange</title>
-  <table style="color: #428bca; background-color: #000000; width: 100%;  margin-top: -8px;">
+  <table style="color: #428bca; background-color: #ffffff; width: 100%;  margin-top: -8px;">
   	<tr>
   		<td>
-  			<h1 style="text-indent:10px"><%= link_to "PocketChange", items_path %></h1>
+  			<h1 id="ourTitle" style="text-indent:10px"><%= link_to "PocketChange", items_path %></h1>
   		</td>
   		<td>
   		</td>
-  		<td style="text-align: right; text-ident: 10%">
+  		<td style="text-align: right; text-ident: 10%; color:#000000">
   			<div>
 		      <% if current_user %>
 		        Signed in as <strong><%= link_to current_user.proper_name, user_path(current_user) %></strong>!
@@ -21,21 +21,27 @@
   		</td>
   	</tr>
   </table>
+  <%= stylesheet_link_tag    "reset" %>
   <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-	  <!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+  <%= stylesheet_link_tag    "our_style" %>
 
-	<!-- Optional theme -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+  <!-- JAVASCRIPTS -->
+  <%= javascript_include_tag "application" %>
 
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <%= javascript_include_tag "myJS" %>
+
+  <%= csrf_meta_tags %>
 </head>
 	<body>
 	  
-		<div class="container col-lg-12">
+		<div id="myMainContainer" class="container col-lg-12">
 			<%= yield %>
 		</div>
 

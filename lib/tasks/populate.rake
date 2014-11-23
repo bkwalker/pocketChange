@@ -29,6 +29,14 @@ namespace :db do
     user.active = true
     user.save!
 
+    items = [["Redwood Table", "./public/example_files/redwood_table.jpg", (50..150).to_a],
+      ["Black Sofa", "./public/example_files/black_sofa.jpg", (115..300).to_a],
+      ["Purple Couch","./public/example_files/purple_couch.jpg", (127..400).to_a],
+      ["Macbook Pro", "./public/example_files/macbook.jpg", (320..1000).to_a],
+      ["iPad Mini 2 Retina", "./public/example_files/ipad_mini.jpg", (112..400).to_a],
+      ["Cherrywood Nighstand", "./public/example_files/cherrywood_nightstand.jpg", (30..112).to_a],
+      ["Maple Coffee Table", "./public/example_files/table.jpg", (20..120).to_a]]
+
     item_names = ["Redwood Table", "Black Sofa", "Purple Couch", "Macbook Pro",
       "iPad Mini 2 Retina", "Cherrywood Night Stand", "Maple Coffee Table"]
     item_descriptions = ["Buy me or don't buy me, but I'm going to sell.",
@@ -91,15 +99,16 @@ namespace :db do
       num_items.times do |k|
         i = Item.new
         i.user_id = u.id
+        item = items.sample
 
         if rand(4).zero?
           i.location_id = location_ids.sample
         end
 
-        i.picture = File.open(item_picture_paths.sample)
-        i.name = item_names.sample
+        i.picture = File.open(item[1])
+        i.name = item[0]
         i.description = item_descriptions.sample
-        i.price = (1..290).to_a.sample
+        i.price = item[2].sample
         i.condition = (0..4).to_a.sample
         i.price_negotiable = [true,false].sample
         i.active = [true, false].sample
@@ -117,7 +126,7 @@ namespace :db do
       num_reviews.times do |l|
         r = Review.new
         r.user_id = u.id
-        r.reviewer_id = (1..User.all.count).to_a.sample
+        r.reviewer_id = User.all.map{|u| u.id}.to_a.sample
         r.comments = review_comments.sample
         r.rating = (1..5).to_a.sample
         r.save!

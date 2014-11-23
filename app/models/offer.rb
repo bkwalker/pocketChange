@@ -8,14 +8,14 @@ class Offer < ActiveRecord::Base
 
   validates_presence_of :user_id, :item_id, :amount
 
-  # PAYMENT_METHODS = [["Cash", 0],["Venmo", 1]]
-  DELIVERY_METHODS = [["Pick-up", 0], ["Meet-up", 1]]
+  PAYMENT_METHODS = [["Cash", 0],["Venmo", 1]]
+  # PAYMENT_METHODS = [["Cash",0]]
 
   validates_numericality_of :item_id, :user_id, :greater_than => 0, :only_integer => true
   validates_numericality_of :amount, :greater_than => 0, :allow_nil => false
   validates_format_of :amount, :with => /\A\d+(?:\.\d{0,2})?\z/
-  # validates_inclusion_of :payment_method, :allow_nil => true, :in => PAYMENT_METHODS.map {|k, v| v}, :message => "Not a valid payment method."
-  validates_inclusion_of :delivery_method, :allow_nil => true, :in => DELIVERY_METHODS.map {|k, v| v}, :message => "Not a valid delivery method."
+  validates_inclusion_of :payment_method, :allow_nil => true, :in => PAYMENT_METHODS.map {|k, v| v}, :message => "Not a valid payment method."
+  # validates_inclusion_of :delivery_method, :allow_nil => true, :in => DELIVERY_METHODS.map {|k, v| v}, :message => "Not a valid delivery method."
   validates_date :pickup_time, :allow_nil => true, :on_or_after => lambda { DateTime.current }, :message => "Pick up time must be today or later."
   validates_inclusion_of :accepted, :in => [true, false], :allow_nil => true
   validates_inclusion_of :active, :in => [true, false], :allow_nil => false
