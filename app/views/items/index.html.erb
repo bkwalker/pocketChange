@@ -10,7 +10,7 @@
 <div class="myDiv col-lg-12">
     <%= form_for @filterrific do |f| %>
         <br>
-        <div style="diplay: inline; margin:0 auto; padding-top: 1%; padding-left: 20%">
+        <div id="searchContainer">
             <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
             Search <%= f.text_field(
               :search_query, 

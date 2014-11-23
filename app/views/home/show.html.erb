@@ -1,21 +1,17 @@
 <html>
   <style>
-    body {
-      background-color: #fff;
-    }
+    #myMainContainer{
+        background-color: #FFFFFF;
+        margin-top: 4%;
+        box-shadow: 5px 5px 5px #888888;
+     }
   </style>
-	<head>	
-		<table style="background-color: #E6E5E0; width: 100%; margin-top: 5%">
-	  		<tr>
-	  			<td style="width:50%; padding-left: 14%; padding-right: 10%; padding-bottom: 12%; padding-top: 4%">
-	  				<h1 id="introText">Quickly Buy and Sell your goods locally at Carnegie Mellon</h1><br>
-	  			</td>
+		<div id="loginTableCell" class="col-lg-7">
+			<h1 id="introText">Quickly Buy and Sell your goods locally at CMU</h1><br>
+		</div>
 
-	  			<td>
-					<%= image_tag("piggy_bank.png", size:"375x375", id:"homeImage") %>  			
-				  </td>
+		<div class="col-lg-5">
+		  <%= image_tag("piggy_bank.png", size:"375x375", id:"homeImage") %>  			
+	  </div>
 	  		
-	  		</tr>
-	  	</table>
-  </head>
 </html>
