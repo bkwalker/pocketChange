@@ -25,6 +25,19 @@
 <br>
 
 
+<br>
+	<b style="padding-left:40px">Customer Reviews:</b><br><br>
+	<% @user.reviews.each do |review| %>
+    	  <div>
+			<b><%= User.find_by_id(review.reviewer_id).proper_name %></b>
+			<br>   		
+			<%= review.rating %> 
+        		<br>
+        		<%= review.comments %> 
+			<br><br>
+    	  </div>
+    	<% end %>
+
 
 <table>
     <div class="container">
@@ -49,6 +62,9 @@
        </ul>
     </div>
 </table>
+
+
+
 <% if can? :update, @user %>
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <% end %>
